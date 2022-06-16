@@ -1,0 +1,42 @@
+<!-- Absolute CSS Unit 
+        px (1px = 0.75pt)
+        pt (1pt = 1/72 inchs) มักใช้ในงานสิ่งพิมพ์
+        cm
+        mm
+        in
+        pc (picas) (1pc = 12pt) -->
+
+<!-- Relative CSS Unit
+        % (percent)
+        em จะอ้างอิงจาก Element Parent ที่ใกล้ที่สุดโดยกำหนดจำนวนเท่าของขนาดปัจจุบัน
+            เช่น ตอนนี้ขนาด 10px ถ้าใส่ 2em ก็จะเป็น 20px
+        rem กำหนดขนาดโดยอ้างอิงกับ Root Element 
+        vw 1% หรือ 1/100 ของ viewport width
+            width ของ browser viewport = 750px ค่า 1vw = 7.5px
+        vh 1% หรือ 1/100 ของ viewport height
+            height ของ browser viewport = 900px ค่า 1vh = 9px
+        vmin, vmax กำหนดค่าต่ำสุด และค่าสูงสุดของ viewport -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Unit Sample</title>
+    <style>
+        p{
+            font-size: 20px;
+        }
+
+        .message{
+            font-size: 1.5mm;
+        }
+    </style>
+</head>
+<body>
+    <p>CSS3</p>
+    <p class="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, cupiditate?</p>
+</body>
+</html>
+

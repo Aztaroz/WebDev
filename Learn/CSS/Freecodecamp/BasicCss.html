@@ -1,0 +1,97 @@
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+<style>
+    :root{
+        --red-color: red;
+    }
+
+    .root{
+        background: red;
+        background: var(--red-color);
+        
+    }
+
+
+    h2{
+        font-size: 30px;
+        font-family: lobster, kanit;
+    }
+
+    .dark-red-text{
+        color: rgb(168, 0, 0);
+    }
+    .thin-red-border{
+        border-color: red;
+        border-width: 5px;
+        border-style: solid;
+        text-align: center;
+        border-radius: 10px;
+        
+    }
+    .green-background{
+        background-color: green;
+    }
+
+    #header{
+        font-size: 300%;
+    }
+
+
+
+
+    .box{
+        border-style: solid;
+        border-width: 10px;
+        border-color: black;
+        text-align: center;
+    }
+
+    .red-box{
+        background-color: red;
+        padding: 30px;
+    }
+    .blue-box{
+        background-color: blue;
+        padding: 30px;
+    }
+    .yellow-box{
+        background-color: yellow;
+        padding: 10px;
+    }
+    .injected-text{
+        padding: -25px;
+        text-align: center;
+    }
+
+
+    body{
+        background-color: black;
+    }
+</style>
+<!--การปรับแต่ง body จะมีผลกับทั้งไฟล์-->
+<body>
+<!--สามารถใส่ Class ได้หลายอันโดยการเว้นวรรค (Space)-->
+<div class="green-background">
+<h2>Text 1</h2>
+<h2 class="thin-red-border dark-red-text" id="header">This is Lobster font</h2>
+</div>
+<h2>Text 2</h2>
+
+<!--margin = Clear area outside the border-->
+<!--padding = Clear area around the content-->
+
+<!--Can use "padding(or)margin: 10px 20px 10px 20px;" that clockwise notation(top > right > bottom > left)-->
+
+<div class="yellow-box">
+    <h2 class="injected-text">This is padding</h2>
+    <h2 class="box red-box">This is red box</h2>
+    <h2 class="box blue-box">This is blue box</h2>
+</div>
+</body>
+
+<!-- Browser จะอ่าน CSS จากบนลงล่าง หากมีการขัดแย้งกันแท็ก style(Ex. style="color : green;") 
+    จะทำงานก่อนเสมอหากไม่มี ID ก็จะทำงานก่อน-->
+
+<!--สามารถใช้ !important ได้เช่น (ex. color: red !important;)-->
+
+<!--ลำดับการทำงานจากก่อนไปหลัง !important >> style >> id >> Class-->
+
