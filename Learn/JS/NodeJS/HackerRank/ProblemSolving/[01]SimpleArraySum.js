@@ -1,3 +1,4 @@
+//undone
 'use strict';
 
 const fs = require('fs');
@@ -31,9 +32,13 @@ function readLine() {
 
 function simpleArraySum(ar, arCount) {
     // Write your code here
-    for (let x = 1; x <= arCount; i++)
-        return x
-    
+    let sum = 0
+    let a = parseInt(ar)
+    for (let x = 0; x <= arCount ; x++)
+        sum += parseInt(a[x])
+    console.log("Type of sum is "+typeof sum)
+    return sum
+
 }
 
 function main() {
@@ -42,9 +47,9 @@ function main() {
     const arCount = parseInt(readLine().trim(), 10);
 
     const ar = readLine().replace(/\s+$/g, '').split(' ').map(arTemp => parseInt(arTemp, 10));
-
-    const result = simpleArraySum(ar, arCount);
-
+    
+    var result = simpleArraySum(ar, arCount);
+    
     ws.write(result + '\n');
 
     ws.end();
