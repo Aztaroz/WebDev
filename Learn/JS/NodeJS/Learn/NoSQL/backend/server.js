@@ -28,20 +28,20 @@ app.get('/slist', async (req, res) => {
 })
 
 app.post('/slist/create', async (req, res) => {
-    const Object = req.body
+    const objects = req.body
     const client = new MongoClient(uri)
     await client.connect()
     await client.db('mydb').collection('s_collection').insertOne(
         {
-            "StudentID": Object['StudentID'],
-            "Title": Object['Title'],
-            "Name": Object['Name'],
-            "Surname": Object['Surname'],
-            "Field": Object['Field'],
-            "Project": Object['Project'],
-            "Savings": Object['Savings'],
-            "GPA": Object['GPA'],
-            "Salary": Object['Salary']
+            "StudentID": objects['StudentID'],
+            "Title": objects['Title'],
+            "Name": objects['Name'],
+            "Surname": objects['Surname'],
+            "Field": objects['Field'],
+            "Project": objects['Project'],
+            "Savings": objects['Savings'],
+            "GPA": objects['GPA'],
+            "Salary": objects['Salary']
         }
     );
 
@@ -49,36 +49,65 @@ app.post('/slist/create', async (req, res) => {
     res.status(200).send({
         "status": "OK",
         "message": "Object is created",
-        "StudentID": Object['StudentID']
+        "StudentID": objects['StudentID']
     });
 })
 
-app.put('slist/update', async (req, res) => {
-    const Object = req.body
-    const id = Object._id
+app.put('/slist/update', async (req, res) => {
+    const objects = req.body
+    const id = objects._id
     const client = new MongoClient(uri)
+    await client.connect()
     await client.db('mydb').collection('s_collection').updateOne({ '_id': ObjectId(id) },
         {
             '$set': {
-                "StudentID": Object['StudentID'],
-                "Title": Object['Title'],
-                "Name": Object['Name'],
-                "Surname": Object['Surname'],
-                "Field": Object['Field'],
-                "Project": Object['Project'],
-                "Savings": Object['Saving'],
-                "GPA": Object['GPA'],
-                "Salary": Object['Salary']
+                "StudentID": objects['StudentID'],
+                "Title": objects['Title'],
+                "Name": objects['Name'],
+                "Surname": objects['Surname'],
+                "Field": objects['Field'],
+                "Project": objects['Project'],
+                "Savings": objects['Savings'],
+                "GPA": objects['GPA'],
+                "Salary": objects['Salary']
             }
         })
     await client.close()
     res.status(200).send({
         "status": "OK",
-        "message": "Object is created",
-        "StudentID": Object['StudentID']
+        "message": "Object is updated",
+        "StudentID": objects['StudentID']
     });
 })
 
+app.delete('/slist/delete', async (req, res) => {
+    const objects = req.body
+    const id = objects._id
+    const client = new MongoClient(uri)
+    await client.connect()
+    await client.db('mydb').collection('s_collection').deleteOne({ '_id': ObjectId(id) })
+    await client.close()
+    res.status(200).send({
+        "status": "OK",
+        "message": "Object is deleted",
+        "StudentID": objects['StudentID']
+    });
+})
+
+app.get('/slist/field/:searchText', async (req,res) => {
+    const {params} = req
+    const searchText = params.searchText
+    const client = new MongoClient(uri)
+    await client.connect()
+    const objects = await client.db('mydb').collection('s_collection').find({"$text": {"$search": searchText}}).toArray()
+
+    await client.close()
+    res.status(200).send({
+        "status": "OK",
+        "message": "Object Found",
+        "StudentID": objects['StudentID']
+    });
+})
 
 
 app.listen(port, () => {
