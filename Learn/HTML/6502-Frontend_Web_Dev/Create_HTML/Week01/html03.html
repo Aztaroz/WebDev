@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Grouping Form Data with Fieldset</h1>
+<fieldset>
+    <legend>Personal information</legend>
+    <form>
+        <label for="fname">First name:</label><br>
+        <input type="text" name="fname"><br>
+        
+        <label for="lname">Last name:</label><br>
+        <input type="text" name="lname"><br>
+        
+        <label for="gender">Gender</label><br>
+        
+            <input type="radio" name="formGender" value="Male">
+                <label>Male</label><br>
+            <input type="radio" name="formGender" value="Female">
+                <label>Female</label><br>
+            <input type="radio" name="formGender" value="Other">
+                <label>Other</label><br>
+                
+        <label>Birthday:</label><br>
+        <input type="date">
+        <hr>
+        
+        <label>Car:</label>
+        <select name="Car">
+            <option value="Fiat">Fiat</option>
+            <option value="Honda">Honda</option>
+            <option value="Toyota">Toyota</option>
+        </select><br>
+        
+        <label>Points:</label><br>
+        <input type="range">
+        
+        <button>Submit</button>
+        
+        
+    </form>
+</fieldset>
+</body>
+</html>
