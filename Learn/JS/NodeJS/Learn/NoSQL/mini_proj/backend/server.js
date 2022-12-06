@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 3578;
+const port = 4596;
 const { MongoClient, ObjectId } = require('mongodb');
 const uri = "mongodb://127.0.0.1:27017/";
 
@@ -20,7 +20,7 @@ app.listen(port, () => {
 app.get('/sleepdata', async (req, res) =>{
     const client = new MongoClient(uri);
     await client.connect();
-    const objects = await client.db('NoSQL_Mini_Proj').collection('sleep_data').find({}).toArray();
+    const objects = await client.db('proj-db').collection('SleepData').find({}).toArray();
     await client.close();
     res.status(200).send(objects);
 })
@@ -30,7 +30,7 @@ app.post('/sleepdata/create', async (req,res) => {
     const objects = req.body;
     const client = new MongoClient(uri);
     await client.connect();
-    await client.db('NoSQL_Mini_Proj').collection('sleep_data').insertOne({
+    await client.db('proj-db').collection('SleepData').insertOne({
         "Year": objects['Year'],
         "Period": objects['Period'],
         "Avg hrs per day sleeping": objects['Avg hrs per day sleeping'],
@@ -53,7 +53,7 @@ app.put('/sleepdata/update', async (req, res) => {
     const id = objects._id;
     const client = new MongoClient(uri);
     await client.connect();
-    await client.db('NoSQL_Mini_Proj').collection('sleep_data').updateOne({ '_id': ObjectId(id) },
+    await client.db('proj-db').collection('SleepData').updateOne({ '_id': ObjectId(id) },
         {
             "$set": {
                 "Year": objects['Year'],
@@ -72,12 +72,12 @@ app.put('/sleepdata/update', async (req, res) => {
     });
 });
 
-//Failed
+//Pass
 app.delete('/sleepdata/delete', async (req, res) =>{
     const id = req.body._id;
     const client = new MongoClient(uri);
     await client.connect();
-    await client.db('MySQL_Mini_Proj').collection('sleep_data').deleteOne({ "_id": ObjectId(id)});
+    await client.db('proj-db').collection('SleepData').deleteOne({ "_id": ObjectId(id)});
     await client.close();
     res.status(200).send({
         "status": "OK",
@@ -85,15 +85,13 @@ app.delete('/sleepdata/delete', async (req, res) =>{
     });
 });
 
-//failed
-app.get('/sleepdata/field/:searchText', async (req, res) =>{
+//Pass
+app.get('/sleepdata/search/:searchText', async (req, res) =>{
     const { params } = req;
     const searchText = params.searchText;
     const client = new MongoClient(uri);
     await client.connect();
-    const objects = await client.db('MySQL_Mini_Proj').collection('sleep_data').find({ $text: {
-        $search: searchText
-    }}).sort({"Date received": -1}).limit(5).toArray();
+    const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).sort({"Date received":-1}).limit(5).toArray();
     await client.close();
     res.status(200).send({
         "status": "OK",
@@ -107,7 +105,7 @@ app.get('/sleepdata/:id', async (req, res) =>{
     const id = req.params.id;
     const client = new MongoClient(uri)
     await client.connect();
-    const objects = await client.db("MySQL_Mini_Proj").collection('sleep_data').findOne({ "_id":ObjectId(id)});
+    const objects = await client.db("proj-db").collection('SleepData').findOne({ "_id":ObjectId(id)});
     await client.close;
     res.status(200).send({
         "status": "OK",
