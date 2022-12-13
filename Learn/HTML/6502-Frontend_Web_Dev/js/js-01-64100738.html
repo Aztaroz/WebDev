@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <p>
+        <b> First Name </b> xxxxxxx
+        <b> Last name </b> xxxxxxx
+        <b> ID </b> xxxxxxx
+    </p>
+
+    <div>
+        <p><b>01 </b> รับข้อความจาก input หลังจากนั้นแสดง ใน span</p>
+        <script>
+            function iAChange() {
+                var iA = document.getElementById("iA")
+                var result = document.getElementById("r1")
+                result.textContent = iA.value;
+            }
+        </script>
+        Input : <input type="text" id="iA" onchange="iAChange()"> <br />
+        Result :<span id="r1"></span>
+        <p>Answer:
+        <pre>
+
+        function iAChange(){
+            var iA = document.getElementById("iA")
+            var result = document.getElementById("r1")
+            result.textContent = iA.value;
+        }
+    
+            </pre>
+    </div>
+
+
+    <div>
+        <p><b> 02 </b> จงเขียนโปรแกรม เพื่อคํานวณหาปริมาตรของรูปทรงกระบอก Volume = Area x H โดยมีข้อมูลเข้า
+            จาก input คือ ค่าของรัศมีของวงกลม (r: Radius) ที่เป็๋นฐานของรูปทรงกระบอก และค่าความ
+            สูงของรูปทรงกระบอก (h: Height) ตามลําดับ และแสดงผลลัพธ์ที่ result โดย
+            วิธีการคํานวณ ปริมาตร = π * r * r * h และ ทศนิยม 2 ตำแหน่ง </p>
+        * input ที่ได้เป็น string ต้องแปลงเป็น Float ก่อน
+        <!--  write avaScript and HTML Here-->
+        <script>
+            function btnCalVolume() {
+                const pi = 3.14
+                var r = parseFloat(document.getElementById('inpR').value)
+                var h = parseFloat(document.getElementById('inpH').value)
+
+                var result = pi * r * r * h;
+                txtResult02.textContent = result.toFixed(2)
+
+            }
+        </script>
+        <p>
+            Radius: <input type="text" id="inpR"> <br>
+            Height: <input type="text" id="inpH" onblur="btnCalVolume()"> <br>
+            Result: <span id="txtResult02"></span>
+
+        <p>Answer:
+        <pre>
+                function btnCalVolume(){
+                    const pi = 3.14
+                    var r = parseFloat(document.getElementById('inpR').value)
+                    var h = parseFloat(document.getElementById('inpH').value)
+
+                    var result = pi*r*r*h;
+                    txtResult02.textContent = result.toFixed(2)
+
+                }
+
+            </pre>
+    </div>
+    <div>
+        <p><b> 03 </b> จงเขียนโปรแกรม เพื่อรับคะแนน 3 ช่อง โดยละช่อง มีคะแนน 0-50 โดยคะแนนประกอบด้วย การบ้าน (hw)
+            สอบกลางภาค (mid) สอบปลายภาค (fin) โดยคิดสัดส่วน ดังนี้ <br />
+            score = (hw(30%) + mid(30%) + fin(40%)) * 2 <br />
+            หลังจากนั้น ตัดเกรด 3 ระดับ ดังนี้
+        <ul>
+            <li> X - excellence หากคะแนนรวม มากกว่าเท่ากับ 85%</li>
+            <li> P - Pass หากคะแนนรวม มากกว่าเท่ากับ 60% </li>
+            <li> F - Fail หากคะแนนรวม น้อยกว่า 60%</li>
+        </ul>
+        </p>
+        <!--  write avaScript and HTML Here-->
+        <script>
+
+            function btnGrade_click() {
+                var hw = parseInt(document.getElementById('iHW').value)
+                var mid = parseInt(document.getElementById('iMid').value)
+                var fin = parseInt(document.getElementById('iFin').value)
+
+                var score = ((hw * 0.3) + (mid * 0.3) + (fin * 0.4)) * 2
+                txtScore.textContent = score
+
+                if (score >= 150 * 0.85) {
+                    txtGd.textContent = "X"
+                }
+                else if (score >= 150 * 0.6) {
+                    txtGd.textContent = "P"
+                }
+                else {
+                    txtGd.textContent = "F"
+                }
+            }
+
+        </script>
+
+        <table style="border: 1px solid rgb(208, 138, 9);">
+            <thead>
+                <tr>
+                    <th> HW </th>
+                    <th> Midterm </th>
+                    <th> Final</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td> <input type="number" id="iHW" min="0" max="50" /></td>
+                    <td> <input type="number" id="iMid" min="0" max="50" /></td>
+                    <td> <input type="number" id="iFin" min="0" max="50" /></td>
+                    <td> <button id="btnGrade" onclick="btnGrade_click()"> Calculate </button></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th> Score </th>
+                    <td> <span id="txtScore"></span></td>
+                    <th> Grade </th>
+                    <td> <span id="txtGd"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Answer:
+        <pre>
+                function btnGrade_click(){
+                    var hw = parseInt(document.getElementById('iHW').value)
+                    var mid = parseInt(document.getElementById('iMid').value)
+                    var fin = parseInt(document.getElementById('iFin').value)
+
+                    var score = ((hw*0.3)+(mid*0.3)+(fin*0.4))*2
+                    txtScore.textContent = score
+
+                    if (score >= 150*0.85){
+                        txtGd.textContent = "X"
+                    }
+                    else if (score >= 150*0.6){
+                        txtGd.textContent = "P"
+                    }
+                    else{
+                        txtGd.textContent = "F"
+                    }
+                }
+            </pre>
+    </div>
+    <div>
+        <p><b> 04 </b> จงเขียนโปรแกรม เพื่อรับตัวเลขเริ่มต้น (start) และ ตัวเลขสุดท้าย (end) start ต้องน้อยกว่า stop
+            หลังจากนั้นหาผลรวมจำนวนเต็ม ของตัวเลขตั้งแต่ start ถึง end </p>
+        <!--  write avaScript and HTML Here-->
+        <script>
+            function btnSum() {
+                var start = parseInt(document.getElementById("inpStart").value)
+                var stop = parseInt(document.getElementById("inpStop").value)
+                var sum = 0
+                for (var i = start; i <= stop; i++) {
+                    result = i + sum
+                    sum = result
+                }
+                txtResult04.textContent = result
+            }
+        </script>
+        Start: <input type="text" id="inpStart" /> <br />
+        End: <input type="text" id="inpStop" onblur="btnSum()"> <br />
+        Result: <span id="txtResult04"></span>
+
+        <p>Answer:
+        <pre>
+                function btnSum(){
+                    var start = parseInt(document.getElementById("inpStart").value)
+                    var stop = parseInt(document.getElementById("inpStop").value)
+                    var sum = 0
+                    for (var i = start; i<= stop; i++){
+                        result = i+sum
+                        sum = result
+                    }
+                    txtResult04.textContent = result
+                }
+            </pre>
+    </div>
+    <div>
+        <p><b> 05 </b> เขียนโปรแกรม สร้างเครื่องคิดเลขอย่างง่าย (สร้างเพียง function เดียว) </p>
+        <!--  write avaScript and HTML Here-->
+        <script>
+            function btnClick(obj) {
+                alert(obj.id)
+                var a = parseFloat(document.getElementById("inpA").value)
+                var b = parseFloat(document.getElementById("inpB").value)
+
+                if (obj == document.getElementById("btnAdd")) {
+                    sum = a + b
+                }
+                else if (obj == document.getElementById("btnSub")) {
+                    sum = a - b
+
+                }
+                else if (obj == document.getElementById("btnMul")) {
+                    sum = a * b
+                }
+                else if (obj == document.getElementById("btnDiv")) {
+                    sum = a / b
+                }
+                else {
+                    console.log("Error")
+                }
+                txtResult.textContent = sum
+
+            }
+        </script>
+
+        A: <input type="text" id="inpA" /> <br />
+        B: <input type="text" id="inpB"> <br />
+        <button id="btnAdd" onclick="btnClick(this)"> + </button>
+        <button id="btnSub" onclick="btnClick(this)"> - </button>
+        <button id="btnMul" onclick="btnClick(this)"> x </button>
+        <button id="btnDiv" onclick="btnClick(this)"> / </button> <br />
+        Result: <span id="txtResult"></span>
+        <p>Answer:
+        <pre>
+                function btnClick(obj){
+                    alert(obj.id)
+                    var a = parseFloat(document.getElementById("inpA").value)
+                    var b = parseFloat(document.getElementById("inpB").value)
+
+                    if (obj == document.getElementById("btnAdd")){
+                        sum = a+b
+                    }
+                    else if (obj == document.getElementById("btnSub")){
+                        sum = a-b
+
+                    }
+                    else if (obj == document.getElementById("btnMul")){
+                        sum = a*b
+                    }
+                    else if (obj == document.getElementById("btnDiv")){
+                        sum = a/b
+                    }
+                    else{
+                        console.log("Error")
+                    }
+                    txtResult.textContent = sum
+
+                }
+            </pre>
+    </div>
+    <div>
+        <p><b> 06 </b> จงเขียนโปรแกรม รับชื่อจาก input เมื่อกดปุม เพิ่ม ให้นำชื่อเพิ่มเข้าไปใน List Item </p>
+        <!--  write avaScript and HTML Here-->
+        <script>
+
+            function btnAdd06_Click() {
+                const namelist = []
+                var text = document.getElementById("inpName06").value
+                let li = document.createElement("li")
+                namelist.push(text)
+                namelist.forEach((item) => {
+                    let li = document.createElement("li");
+                    li.innerText = item;
+                    document.getElementById("lstName").appendChild(li);
+                });
+
+            }
+
+        </script>
+        Name: <input type="text" id="inpName06" /> <button id="btnAdd06" onclick="btnAdd06_Click()"> Add </button>
+        <br />
+        Name List
+        <ul id="lstName">
+
+            </li>
+        </ul>
+
+        <p>Answer:
+        <pre>
+                function btnAdd06_Click(){
+                    const namelist = []
+                    var text = document.getElementById("inpName06").value
+                    let li = document.createElement("li")
+                    namelist.push(text)
+                    namelist.forEach((item) => {
+                    let li = document.createElement("li");
+                    li.innerText = item;
+                    document.getElementById("lstName").appendChild(li);
+                    });
+                    
+                }
+            </pre>
+    </div>
+    <div>
+        <p><b> 07 </b> เขียนโปรแกรม รับชื่อ นามสกุล เบอร์โทร เมื่อกดปุ่ม Add แล้ว ให้เพิ่มข้อมูลในตาราง </p>
+        <!--  write avaScript and HTML Here-->
+        <script>
+
+        </script>
+
+        <table style="border: 1px solid blue;">
+            <thead>
+                <tr>
+                    <th> First Name </th>
+                    <th> Last Name </th>
+                    <th> Telno</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td> <input type="text" id="txtFName" /></td>
+                    <td> <input type="text" id="txtLName" /></td>
+                    <td> <input type="text" id="txtTelNo" /></td>
+                    <td> <button id="btnInfo" onclick="btnInfo_click()"> Add </button></td>
+                </tr>
+            </thead>
+            <tbody id="tblInfo2">
+            </tbody>
+        </table>
+        <p>Answer:
+        <pre>
+
+
+            </pre>
+    </div>
+</body>
+
+</html>
