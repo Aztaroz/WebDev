@@ -215,19 +215,21 @@ function showStudentCreateBox() {
   const date = d.toISOString().split('T')[0];
 
   Swal.fire({
-    title: 'Create Student Transaction',
-    html: '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
+    title: 'Create Sleep Transaction',
+    html: 
+    // '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
       '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
 
-      '<div class="mb-3"><label for="StudentID" class="form-label">Year</label>' +
+      '<div class="mb-3"><label for="StudentID" class="form-label">Recorded Year</label>' +
       '<input class="form-control" id="StudentID" placeholder="Year (eg.2002)"></div>' +
 
       '<div class="mb-3"><label for="Title" class="form-label">Average Sleeping Hours / Day</label>' +
-      '<input class="form-control" id="Title" placeholder="Title"></div>' +
+      '<input class="form-control" id="Title" placeholder="Hours (eg.8)"></div>' +
 
       '<div class="mb-3"><label for="Name" class="form-label">Type of Day</label>' +
       // '<input class="form-control" id="Name" placeholder="Name"></div>' +
       `<select class="form-control" id="Name">
+        <option value="" disabled selected>Please Select...</option>
         <option value="All days">All days</option>
         <option value="Nonholiday weekdays">Nonholiday weekdays</option>
         <option value="Weekend days and holidays">Weekend days and holidays</option>
@@ -236,6 +238,7 @@ function showStudentCreateBox() {
       '<div class="mb-3"><label for="Surname" class="form-label">Age Group</label>' +
       // '<input class="form-control" id="Surname" placeholder="Surname"></div>' 
       `<select class="form-control" id="Surname">
+        <option value="" disabled selected>Please Select...</option>
         <option value="	15 years and over">	15 years and over</option>
         <option value="15 to 24 years">15 to 24 years</option>
         <option value="25 to 34 years">25 to 34 years</option>
@@ -244,20 +247,15 @@ function showStudentCreateBox() {
       </select></div>`
       +
 
-      '<div class="mb-3"><label for="Field" class="form-label">Field</label>' +
-      '<input class="form-control" id="Field" placeholder="Field"></div>' +
-
-      '<div class="mb-3"><label for="Project" class="form-label">Project</label>' +
-      '<input class="form-control" id="Project" placeholder="Project"></div>' +
-
-      '<div class="mb-3"><label for="Savings" class="form-label">Savings</label>' +
-      '<input class="form-control" id="Savings" placeholder="Savings"></div>' +
-
-      '<div class="mb-3"><label for="GPA" class="form-label">GPA</label>' +
-      '<input class="form-control" id="GPA" placeholder="GPA"></div>' +
-
-      '<div class="mb-3"><label for="Salary" class="form-label">Salary</label>' +
-      '<input class="form-control" id="Salary" placeholder="Salary"></div>',
+      '<div class="mb-3"><label for="Field" class="form-label">Sex</label>' +
+      // '<input class="form-control" id="Field" placeholder="Sex"></div>' 
+      `<select class="form-control" id="Field">
+        <option value="" disabled selected>Please Select...</option>
+        <option value="Men">Men</option>
+        <option value="Women">Women</option>
+        <option value="Both">Both</option>
+      </select></div>`
+      ,
 
     focusConfirm: false,
     preConfirm: () => {

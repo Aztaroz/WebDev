@@ -91,7 +91,8 @@ app.get('/sleepdata/search/:searchText', async (req, res) =>{
     const searchText = params.searchText;
     const client = new MongoClient(uri);
     await client.connect();
-    const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).sort({"Date received":-1}).limit(5).toArray();
+    // const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).sort({"Date received":-1}).limit(5).toArray();
+    const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).sort({"Year":1}).toArray();
     await client.close();
     res.status(200).send({
         "status": "OK",
