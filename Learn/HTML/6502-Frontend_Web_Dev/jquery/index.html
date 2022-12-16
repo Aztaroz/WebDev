@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button id="btnOK">OK</button>
+    <div id="data">
+        <p>This is tag div</p>
+    </div>
+
+    <script>
+        function btnOK_Click(){
+            $("#data").attr("style", "background-color: red")
+        }
+
+        $(()=>{
+            $("#btnOK").click(()=>{
+                $("#data").attr("style", "background-color: yellow")
+            })
+
+            $("#btnOK").dblclick(()=>{
+                $("#data").append("<h1>Kasidit</h1>")
+            })
+        })
+    </script>
+
+
+
+
+
+    <!-- <h1>Line 1</h1>
+    <p>Line 2</p>
+    <p>Line 3</p>
+    <div id="fred1">Line 4</div>
+    <div id="fred2">Line 5</div>
+    <button id="btn1">hide paragraph</button>
+    <button id="btn2">show paragraph</button>
+
+    <hr>
+
+    <input type="text" id="txtname2"> <br>
+    <span id="txtresult2"></span>
+
+    <script>
+        function txtname2_blur(){
+            // alert("Hello")
+            var txtname = $("#txtname2").val()
+            // $("#txtresult2").text(txtname)
+            $("#txtresult2").html("<h1>"+ txtname +"<h1>")
+            $("#txtname").val(txtname)
+        }
+
+        $(()=>{
+            // alert("Hello by jquery ")
+            $("#txtname2").blur(txtname2_blur)
+            $("#btn1").click(()=>{
+                $("P").hide()
+            })
+            $("#btn2").click(()=>{
+                $("P").show()
+            })
+
+        })
+    </script> -->
+</body>
+</html>

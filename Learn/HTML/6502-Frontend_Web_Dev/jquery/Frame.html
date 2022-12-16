@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>64120280</title>
+    <script src="https://code.jquery.com/jquery-3.6.2.js"  crossorigin="anonymous"></script>
+
+    <style>
+        div{
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <p>
+        <b> First Name </b> รัชชานนท์
+        <b> Last name </b> ชูเกียรติเถกิง
+        <b> ID </b> 64120280
+    </p>
+
+    <div>
+        <p><b>01 </b> รับข้อความจาก input หลังจากนั้นแสดง ใน span</p>
+        <script>
+            $(()=>{
+                $("#iA").change(iA_Change);
+            })
+
+            function iA_Change(){
+                var iA = $("#iA").val();
+                $("#r1").text(iA);
+            }
+        </script>
+
+
+            Input : <input type="text" id="iA" > <br/>
+            Result :<span id="r1"></span>
+
+            <p>Answer:
+            <pre>
+                $(()=>{
+                    $("#iA").change(iA_Change);
+                })
+    
+                function iA_Change(){
+                    var iA = $("#iA").val();
+                    $("#r1").text(iA);
+                }
+        
+    
+            </pre>
+    </div>
+    
+   
+    <div>
+        <p><b> 02  </b> จงเขียนโปรแกรม เพื่อคํานวณหาปริมาตรของรูปทรงกระบอก Volume = Area x H โดยมีข้อมูลเข้า
+            จาก input คือ ค่าของรัศมีของวงกลม (r: Radius) ที่เป็๋นฐานของรูปทรงกระบอก และค่าความ
+            สูงของรูปทรงกระบอก (h: Height) ตามลําดับ และแสดงผลลัพธ์ที่ result โดย
+            วิธีการคํานวณ ปริมาตร = π * r * r * h    และ ทศนิยม 2 ตำแหน่ง   </p>
+            * input ที่ได้เป็น string ต้องแปลงเป็น Float ก่อน
+             <!--  write avaScript and HTML Here-->
+             <script>
+
+                $(()=>{
+                    $("#inpH").blur(btnCalVolume);
+                })
+              
+                function btnCalVolume() {
+                      var inpR = $("#inpR");
+                      var inpH = $("#inpH");
+                      var r = parseFloat(inpR.val());
+                      var h = parseFloat(inpH.val());
+                      var v = Math.PI * r * r * h;
+                      $("#txtResult02").text(v.toFixed(2));
+                    
+                };
+                  
+             </script>
+            <p>             
+             Radius: <input type="text" id="inpR" /> <br/>
+             Height: <input type="text"  id="inpH" > <br/>
+             Result: <span id="txtResult02"></span>
+
+            <p>Answer:
+            <pre>
+                $(()=>{
+                    $("#inpH").blur(btnCalVolume);
+                })
+              
+                function btnCalVolume() {
+                      var inpR = $("#inpR");
+                      var inpH = $("#inpH");
+                      var r = parseFloat(inpR.val());
+                      var h = parseFloat(inpH.val());
+                      var v = Math.PI * r * r * h;
+                      $("#txtResult02").text(v.toFixed(2));
+                    
+                };
+
+            </pre>
+    </div>
+    <div>
+        <p><b> 03  </b>   จงเขียนโปรแกรม เพื่อรับคะแนน 3 ช่อง โดยละช่อง มีคะแนน 0-50 โดยคะแนนประกอบด้วย การบ้าน (hw) สอบกลางภาค (mid) สอบปลายภาค (fin) โดยคิดสัดส่วน ดังนี้ <br/>
+                    score =  (hw(30%) + mid(30%) + fin(40%)) * 2 <br/>
+                    หลังจากนั้น ตัดเกรด 3 ระดับ ดังนี้
+                    <ul>
+                        <li> X  - excellence หากคะแนนรวม มากกว่าเท่ากับ 85%</li>
+                        <li> P  - Pass หากคะแนนรวม มากกว่าเท่ากับ 60% </li>
+                        <li> F  - Fail หากคะแนนรวม น้อยกว่า 60%</li>
+                    </ul>
+                   </p>
+             <!--  write avaScript and HTML Here-->
+            <script>
+                    $(()=>{
+                        $("#btnGrade").click(btnGrade_click);
+                    })
+                    function btnGrade_click() {
+                      var iHW = $("#iHW").val();
+                      var iMid = $("#iMid").val();
+                      var iFin = $("#iFin").val();
+                      var vs = (iHW * 30 / 100 + iMid * 30 / 100 + iFin * 40 / 100) * 2;
+                      if (vs >= 85) {
+                        $("#txtScore").text(vs);
+                        $("#txtGd").text("X - excellence");
+                      }
+                      if (vs >= 60) {
+                        $("#txtScore").text(vs);
+                        $("#txtGd").text("P - Pass");
+                      }
+                      if (vs < 60) {
+                        $("#txtScore").text(vs);
+                        $("#txtGd").text("F - Fail");
+                      }
+                    };
+            </script>
+  
+             <table style="border: 1px solid rgb(208, 138, 9);">
+                <thead>
+                    <tr> 
+                        <th> HW </th>
+                        <th> Midterm </th>
+                        <th> Final</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td> <input type="number" id="iHW" min="0" max="50" /></td>
+                        <td> <input type="number" id="iMid" min="0" max="50" /></td>
+                        <td> <input type="number" id="iFin" min="0" max="50" /></td>
+                        <td> <button id="btnGrade" >  Calculate </button></td>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr>
+                        <th> Score </th>
+                        <td> <span id="txtScore"></span></td>
+                        <th> Grade </th>
+                        <td> <span id="txtGd"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Answer:
+            <pre>
+                $(()=>{
+                    $("#btnGrade").click(btnGrade_click);
+                })
+                function btnGrade_click() {
+                  var iHW = $("#iHW").val();
+                  var iMid = $("#iMid").val();
+                  var iFin = $("#iFin").val();
+                  var vs = (iHW * 30 / 100 + iMid * 30 / 100 + iFin * 40 / 100) * 2;
+                  if (vs >= 85) {
+                    $("#txtScore").text(vs);
+                    $("#txtGd").text("X - excellence");
+                  }
+                  if (vs >= 60) {
+                    $("#txtScore").text(vs);
+                    $("#txtGd").text("P - Pass");
+                  }
+                  if (vs < 60) {
+                    $("#txtScore").text(vs);
+                    $("#txtGd").text("F - Fail");
+                  }
+                };
+            </pre>
+    </div>
+    <div>
+        <p><b> 04  </b>  จงเขียนโปรแกรม เพื่อรับตัวเลขเริ่มต้น (start) และ ตัวเลขสุดท้าย (end)  start ต้องน้อยกว่า stop หลังจากนั้นหาผลรวมจำนวนเต็ม ของตัวเลขตั้งแต่ start ถึง end   </p>
+             <!--  write avaScript and HTML Here-->
+              
+             <script>
+
+                $(()=>{
+                    $("#inpStop").blur(btnSum);
+                })
+                    function btnSum() {
+                      var inpStart = parseInt($("#inpStart").val());
+                      var inpStop = parseInt($("#inpStop").val());
+                      var txtResult04 = $("#txtResult04");
+                      var result = 0;
+                      for (var i = inpStart; i <= inpStop; i++) {
+                        result += i;
+                      }
+                      txtResult04.text(result);
+                    
+                  };
+             </script>
+             Start: <input type="text" id="inpStart" /> <br/>
+             End: <input type="text"  id="inpStop" > <br/>
+             Result: <span id="txtResult04"></span>
+
+            <p>Answer:
+            <pre>
+                $(()=>{
+                    $("#inpStop").blur(btnSum);
+                })
+                    function btnSum() {
+                      var inpStart = parseInt($("#inpStart").val());
+                      var inpStop = parseInt($("#inpStop").val());
+                      var txtResult04 = $("#txtResult04");
+                      var result = 0;
+                      for (var i = inpStart; i <= inpStop; i++) {
+                        result += i;
+                      }
+                      txtResult04.text(result);
+                    
+                  };
+            </pre>
+    </div>
+    <div>
+        <p><b> 05  </b>  เขียนโปรแกรม สร้างเครื่องคิดเลขอย่างง่าย (สร้างเพียง function เดียว)  </p>
+             <!--  write avaScript and HTML Here-->
+            <script>
+                $(document).ready(function () {
+                    $('#btnAdd').click(function () {
+                        btnClick(this);
+                    });
+                    $('#btnSub').click(function () {
+                        btnClick(this);
+                    });
+                    $('#btnMul').click(function () {
+                        btnClick(this);
+                    });
+                    $('#btnDiv').click(function () {
+                        btnClick(this);
+                    });
+                });
+
+                    function btnClick(obj) {
+                        alert(obj.id)   
+                        var A = parseFloat($('#inpA').val());
+                        var B = parseFloat($('#inpB').val());
+
+        
+                        if (obj.id == 'btnAdd') {
+                            ans = A + B;
+                        } else if (obj.id == 'btnSub') {
+                            ans = A - B;
+                        } else if (obj.id == 'btnMul') {
+                            ans = A * B;
+                        } else if (obj.id == 'btnDiv') {
+                            ans = A / B;
+                        }
+        
+                        $('#txtResult').text(ans);
+                }
+                
+            </script>
+
+             A: <input type="text" id="inpA" /> <br/>
+             B: <input type="text"  id="inpB"> <br/>
+             <button id="btnAdd"> + </button> 
+             <button id="btnSub"> - </button>
+             <button id="btnMul"> x </button> 
+             <button id="btnDiv" > / </button><br/>
+             Result: <span id="txtResult"></span>
+            <p>Answer:
+            <pre>
+                $(document).ready(function () {
+                    $('#btnAdd').click(function () {
+                        btnClick(this);
+                    });
+                    $('#btnSub').click(function () {
+                        btnClick(this);
+                    });
+                    $('#btnMul').click(function () {
+                        btnClick(this);
+                    });
+                    $('#btnDiv').click(function () {
+                        btnClick(this);
+                    });
+                });
+
+                    function btnClick(obj) {
+                        alert(obj.id)   
+                        var A = parseFloat($('#inpA').val());
+                        var B = parseFloat($('#inpB').val());
+
+        
+                        if (obj.id == 'btnAdd') {
+                            ans = A + B;
+                        } else if (obj.id == 'btnSub') {
+                            ans = A - B;
+                        } else if (obj.id == 'btnMul') {
+                            ans = A * B;
+                        } else if (obj.id == 'btnDiv') {
+                            ans = A / B;
+                        }
+        
+                        $('#txtResult').text(ans);
+                }
+            </pre>
+    </div>
+    <div>
+        <p><b> 06  </b> จงเขียนโปรแกรม รับชื่อจาก input เมื่อกดปุม เพิ่ม ให้นำชื่อเพิ่มเข้าไปใน List Item      </p>
+             <!--  write avaScript and HTML Here-->
+            <script>
+                $(()=>{
+                    $("#btnAdd06").click(btnAdd06_Click);
+              
+                })
+
+                    function btnAdd06_Click() {
+                      var text = $("#inpName06").val();
+                      var ListItem = $("#lstName");
+                      ListItem.append("<li>" + text + "</li>");
+                    };
+            </script>
+
+             Name: <input type="text" id="inpName06" /> <button id="btnAdd06"> Add </button> <br/>
+             Name List
+             <ul id="lstName">
+
+             </ul>
+
+            <p>Answer:
+            <pre>
+                $(()=&gt;{
+                    $("#btnAdd06").click(btnAdd06_Click);
+              
+                })
+
+                    function btnAdd06_Click() {
+                      var text = $("#inpName06").val();
+                      var ListItem = $("#lstName");
+                      ListItem.append("&lt;li&gt;" + text + "&lt;/li&gt;");
+                    };
+            </pre>
+    </div>
+    <div>
+        <p><b> 07  </b> เขียนโปรแกรม รับชื่อ นามสกุล เบอร์โทร เมื่อกดปุ่ม Add แล้ว ให้เพิ่มข้อมูลในตาราง   </p>
+             <!--  write avaScript and HTML Here-->
+    
+                <script>
+                    $(document).ready(function() {
+                      $("#btnInfo").click(function() {
+                        var txtFName = $("#txtFName").val();
+                        var txtLName = $("#txtLName").val();
+                        var txtTelNo = $("#txtTelNo").val();
+                        $("#tblInfo").append(
+                          "<tr>" +"<td>" +txtFName +"</td>" +"<td>" +txtLName +"</td>" +"<td>" +txtTelNo +"</td>" +"</tr>"
+                        );
+                      });
+                    });
+                  </script>
+             
+             
+            <table style="border: 1px solid blue;">
+                <thead>
+                    <tr> 
+                        <th> First Name </th>
+                        <th> Last Name </th>
+                        <th> Telno</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td> <input type="text" id="txtFName" /></td>
+                        <td> <input type="text" id="txtLName" /></td>
+                        <td> <input type="text" id="txtTelNo" /></td>
+                        <td> <button id="btnInfo" > Add </button></td>
+                    </tr>
+                </thead>
+                <tbody id="tblInfo">
+                </tbody>
+            </table>
+            <p>Answer:
+            <pre>
+                $(document).ready(function() {
+                    $("#btnInfo").click(function() {
+                      var txtFName = $("#txtFName").val();
+                      var txtLName = $("#txtLName").val();
+                      var txtTelNo = $("#txtTelNo").val();
+                      $("#tblInfo").append(
+                        "&lt;tr&gt;" +"&lt;td&gt;" +txtFName +"&lt;/td&gt;" +"&lt;td&gt;" +txtLName +"&lt;/td&gt;" +"&lt;td&gt;" +txtTelNo +"&lt;/td&gt;" +"&lt;/tr&gt;"
+                      );
+                    });
+                  });
+
+            </pre>
+    </div>
+</body>
+</html>

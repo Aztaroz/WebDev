@@ -32,7 +32,6 @@ app.post('/sleepdata/create', async (req,res) => {
     await client.connect();
     await client.db('proj-db').collection('SleepData').insertOne({
         "Year": objects['Year'],
-        "Period": objects['Period'],
         "Avg hrs per day sleeping": objects['Avg hrs per day sleeping'],
         "Type of Days": objects['Type of Days'],
         "Age Group": objects ['Age Group'],
@@ -92,7 +91,20 @@ app.get('/sleepdata/search/:searchText', async (req, res) =>{
     const client = new MongoClient(uri);
     await client.connect();
     // const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).sort({"Date received":-1}).limit(5).toArray();
-    const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).sort({"Year":1}).toArray();
+
+    const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).toArray();
+
+    // const objects = await client.db('proj-db').collection('_id').aggregate([
+    //     {
+    //         "$match": {"$text": {'$search': searchText}}
+    //       },
+    //     {
+    //     '$sample': {
+    //       'size': 1000
+    //     //current
+    //     }
+    //   }]).toArray();
+
     await client.close();
     res.status(200).send({
         "status": "OK",

@@ -217,27 +217,27 @@ function showStudentCreateBox() {
   Swal.fire({
     title: 'Create Sleep Transaction',
     html: 
-    // '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
+    '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
       '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
 
-      '<div class="mb-3"><label for="StudentID" class="form-label">Recorded Year</label>' +
-      '<input class="form-control" id="StudentID" placeholder="Year (eg.2002)"></div>' +
+      '<div class="mb-3"><label for="Year" class="form-label">Recorded Year</label>' +
+      '<input class="form-control" id="Year" placeholder="Year (eg.2002)"></div>' +
 
-      '<div class="mb-3"><label for="Title" class="form-label">Average Sleeping Hours / Day</label>' +
-      '<input class="form-control" id="Title" placeholder="Hours (eg.8)"></div>' +
+      '<div class="mb-3"><label for="Avg" class="form-label">Average Sleeping Hours / Day</label>' +
+      '<input class="form-control" id="Avg" placeholder="Hours (eg.8)"></div>' +
 
-      '<div class="mb-3"><label for="Name" class="form-label">Type of Day</label>' +
-      // '<input class="form-control" id="Name" placeholder="Name"></div>' +
-      `<select class="form-control" id="Name">
+      '<div class="mb-3"><label for="TOD" class="form-label">Type of Day</label>' +
+      // '<input class="form-control" id="TOD" placeholder="Name"></div>' +
+      `<select class="form-control" id="TOD">
         <option value="" disabled selected>Please Select...</option>
         <option value="All days">All days</option>
         <option value="Nonholiday weekdays">Nonholiday weekdays</option>
         <option value="Weekend days and holidays">Weekend days and holidays</option>
       </select></div>` +
 
-      '<div class="mb-3"><label for="Surname" class="form-label">Age Group</label>' +
-      // '<input class="form-control" id="Surname" placeholder="Surname"></div>' 
-      `<select class="form-control" id="Surname">
+      '<div class="mb-3"><label for="age_group" class="form-label">Age Group</label>' +
+      // '<input class="form-control" id="age_group" placeholder="Surname"></div>' 
+      `<select class="form-control" id="age_group">
         <option value="" disabled selected>Please Select...</option>
         <option value="	15 years and over">	15 years and over</option>
         <option value="15 to 24 years">15 to 24 years</option>
@@ -247,9 +247,9 @@ function showStudentCreateBox() {
       </select></div>`
       +
 
-      '<div class="mb-3"><label for="Field" class="form-label">Sex</label>' +
-      // '<input class="form-control" id="Field" placeholder="Sex"></div>' 
-      `<select class="form-control" id="Field">
+      '<div class="mb-3"><label for="sex" class="form-label">Sex</label>' +
+      // '<input class="form-control" id="sex" placeholder="Sex"></div>' 
+      `<select class="form-control" id="sex">
         <option value="" disabled selected>Please Select...</option>
         <option value="Men">Men</option>
         <option value="Women">Women</option>
@@ -266,44 +266,57 @@ function showStudentCreateBox() {
 
 function slistCreate() {
 
-  const Created_Date = document.getElementById('Created_Date').value;
-  const StudentID = document.getElementById('StudentID').value;
-  const Title = document.getElementById('Title').value;
-  const Name = document.getElementById('Name').value;
-  const Surname = document.getElementById('Surname').value;
-  const Field = document.getElementById('Field').value;
-  const Project = document.getElementById('Project').value;
-  const Savings = document.getElementById('Savings').value;
-  const GPA = document.getElementById('GPA').value;
-  const Salary = document.getElementById('Salary').value;
+  // const Created_Date = document.getElementById('Created_Date').value;
+  const Year = document.getElementById('Year').value;
+  const Avg = document.getElementById('Avg').value;
+  const TOD = document.getElementById('TOD').value;
+  const age_group = document.getElementById('age_group').value;
+  const sex = document.getElementById('sex').value; 
+  // const Project = document.getElementById('Project').value;
+  // const Savings = document.getElementById('Savings').value;
+  // const GPA = document.getElementById('GPA').value;
+  // const Salary = document.getElementById('Salary').value;
 
   console.log(JSON.stringify({
-    Created_Date: Created_Date,
-    StudentID: StudentID,
-    Title: Title,
-    Name: Name,
-    Surname: Surname,
-    Field: Field,
-    Project: Project,
-    Savings: Savings,
-    GPA: GPA,
-    Salary: Salary,
+    // Created_Date: Created_Date,
+    // StudentID: StudentID,
+    // Title: Title,
+    // Name: Name,
+    // Surname: Surname,
+    // Field: Field,
+    // Project: Project,
+    // Savings: Savings,
+    // GPA: GPA,
+    // Salary: Salary,
+    Year: Year,
+    Avg: Avg,
+    TOD: TOD,
+    age_group: age_group,
+    sex: sex
+
   }));
 
+  //failed
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "http://localhost:3000/slist/create");
+  xhttp.open("POST", "http://localhost:4596/sleepdata/create");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(JSON.stringify({
-    Created_Date: Created_Date,
-    StudentID: StudentID,
-    Title: Title,
-    Name: Name,
-    Surname: Surname,
-    Field: Field,
-    Project: Project,
-    Savings: Savings,
-    GPA: GPA,
-    Salary: Salary,
+    // Created_Date: Created_Date,
+    // StudentID: StudentID,
+    // Title: Title,
+    // Name: Name,
+    // Surname: Surname,
+    // Field: Field,
+    // Project: Project,
+    // Savings: Savings,
+    // GPA: GPA,
+    // Salary: Salary,
+    Year: Year,
+    Avg: Avg,
+    TOD: TOD,
+    age_group: age_group,
+    sex: sex
+
   }));
 
   xhttp.onreadystatechange = function () {
