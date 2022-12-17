@@ -41,8 +41,10 @@
     <div class="container-fluid">
 
       <!-- off canvas Button -->
-      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
-      aria-controls="offcanvasWithBothOptions" style="margin-right: 30px; background-color: #1356ba;"><i class="fa-solid fa-arrow-right-from-bracket"></i> </button>
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
+        style="margin-right: 30px; background-color: #1356ba;"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </button>
       <!-- ---------- -->
 
       <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">เทศบาลตำบลท่าศาลา</a>
@@ -70,7 +72,8 @@
           </li>
           <!-- dropdown -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgba(255, 255, 255, 0.508);">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+              style="color: rgba(255, 255, 255, 0.508);">
               ข้อมูลทั่วไป
             </a>
             <ul class="dropdown-menu">
@@ -98,15 +101,100 @@
   <!-- off canvas -->
   <div class="offcanvas offcanvas-start container-md" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
     aria-labelledby="offcanvasWithBothOptionsLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+
+    <div class="offcanvas-header ">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">ข้อมูลบุคลากร</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
+
+    
+    <div class="offcanvas-body" style="overflow: hidden;" >
+      <div class="list-group"  style="margin-bottom: 450px; overflow: hidden;">
+        <button type="button" class="list-group-item list-group-item-action">คณะผู้บริหาร</button>
+        <button type="button" class="list-group-item list-group-item-action">สมาชิกสภาเทศบาล</button>
+        <button type="button" class="list-group-item list-group-item-action">ข้าราชการพนักงานเทศบาล</button>
+      </div>
+    </div>
+
+
+
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">ข้อมูลการดำเนินงาน</h5>
+    </div>
     <div class="offcanvas-body">
-      <p>Try scrolling the rest of the page to see this option in action.</p>
+      <div class="list-group">
+        <button type="button" class="list-group-item list-group-item-action">แผนพัฒนา</button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>แผนพัฒนาท้องถิ่น</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>แผนดำเนินงานประจำปี</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>แผนอัตรากำลัง</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>แผนปฎิบัติการป้องการทุจริต</li>
+        </button>
+
+        <button type="button" class="list-group-item list-group-item-action">ข้อบัญญัติ</button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>เทศบัญญัติงบประมาณ</li>
+        </button>
+
+        <button type="button" class="list-group-item list-group-item-action">รายงาน</button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>รายงานสถานะทางการเงิน</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>รายงานผลการดำเนินงาน 6 เดือน/ปี</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>ข้อมูลสถิติการให้บริการ</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>รายงานการติดตามการใช้จ่ายงบประมาณรอบ 6 เดือน / ปี</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>รายงานการประชุมสภาท้องถิ่น</li>
+        </button>
+
+        <button type="button" class="list-group-item list-group-item-action">จัดซื้อจัดจ้าง</button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>ข่าวจัดซื้อจัดจ้าง</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>แผนปฏิบัติการจัดซื้อ-จัดจ้าง</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>ผลปฏิบัติการจัดซื้อ-จัดจ้าง</li>
+        </button>
+
+        <button type="button" class="list-group-item list-group-item-action">การบริหารและพัฒนาทรัพยากร</button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>นโยบายการบริหารทรัพยากรบุคคล</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>การดำเนินการตามนโยบายการบริหารทรัพยากรบุคคล</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>หลักเกณฑ์การบริหารและพัฒนาทรัพยากรบุคคล</li>
+        </button>
+        <button type="button" class="list-group-item list-group-item-action">
+          <li>รายงานผลการบริหารและพัฒนาทรัพยากรบุคคลประจำปี</li>
+        </button>
+
+        <button type="button"
+          class="list-group-item list-group-item-action">มาตรการส่งเสริมคุณธรรมและความโปร่งใสภายในหน่วยงาน</button>
+        <button type="button" class="list-group-item list-group-item-action">ข่าวประชาสัมพันธ์</button>
+        <button type="button" class="list-group-item list-group-item-action">แบบฟอร์มติดต่อราชการ</button>
+        <button type="button" class="list-group-item list-group-item-action">อำนาจหน้าที่</button>
+        <button type="button" class="list-group-item list-group-item-action">อำนาจหน้าที่</button>
+        <button type="button" class="list-group-item list-group-item-action">มาตรฐานการให้บริการ</button>
+        <button type="button" class="list-group-item list-group-item-action">คู่มือการปฏิบัติงาน</button>
+      </div>
     </div>
   </div>
-
 
 
   <!-- header image -->
@@ -133,6 +221,14 @@
         </div>
     </h5>
   </div>
+
+  <br><br>
+  
+  <div class="container-md text-center">
+    <img src="https://thasalacity.go.th/images/3boss.gif" alt="">
+  </div>
+
+
 
   <br><br>
   <div class="container-md" style="
@@ -335,8 +431,8 @@
     </div>
   </div>
 
-
-
+  <!-- footer -->
+  
 
 </body>
 
