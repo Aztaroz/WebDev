@@ -39,6 +39,12 @@
   <!-- header -->
   <nav class="navbar navbar-expand-lg " style="background-color: #1363DF;">
     <div class="container-fluid">
+
+      <!-- off canvas Button -->
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+      aria-controls="offcanvasWithBothOptions" style="margin-right: 30px; background-color: #1356ba;"><i class="fa-solid fa-arrow-right-from-bracket"></i> </button>
+      <!-- ---------- -->
+
       <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">เทศบาลตำบลท่าศาลา</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,10 +68,44 @@
           <li class="nav-item">
             <a class="nav-link" href="#" style="color: rgba(255, 255, 255, 0.508);">ติดต่อ - สอบถาม</a>
           </li>
+          <!-- dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgba(255, 255, 255, 0.508);">
+              ข้อมูลทั่วไป
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">ประวัติความเป็นมา</a></li>
+              <li><a class="dropdown-item" href="#">วิสัยทัศน์ / พันธกิจ</a></li>
+              <li><a class="dropdown-item" href="#">สภาพและข้อมูลพื้นฐาน</a></li>
+              <li><a class="dropdown-item" href="#">โครงสร้างองค์กร</a></li>
+              <li><a class="dropdown-item" href="#">สำนักงาน</a></li>
+              <li><a class="dropdown-item" href="#">สายตรงนายก / ร้องเรียน</a></li>
+              <li><a class="dropdown-item" href="#">ติดต่อ - สอบถาม</a></li>
+              <li><a class="dropdown-item" href="#">ส่งข้อความ : sms</a></li>
+              <li><a class="dropdown-item" href="#">ผู้ดูแลระบบ</a></li>
+              <!-- <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+            </ul>
+          </li>
+
         </ul>
       </div>
+
+
     </div>
   </nav>
+
+  <!-- off canvas -->
+  <div class="offcanvas offcanvas-start container-md" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+    aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>Try scrolling the rest of the page to see this option in action.</p>
+    </div>
+  </div>
 
 
 
@@ -108,6 +148,7 @@
             <i class="fa-solid fa-bullhorn"></i>
             ประกาศเทศบาลตำบลท่าศาลา
             <i class="fa-solid fa-bullhorn fa-flip-horizontal"></i>
+            <hr>
           </h1>
         </center>
       </div>
@@ -124,7 +165,8 @@
               height="600">
           </div>
           <div class="carousel-item">
-            <img src="https://thasalacity.go.th/banner/photo/std210322_171610.jpg" class="d-block w-100" alt="...">
+            <img src="https://thasalacity.go.th/banner/photo/std210322_171610.jpg" class="d-block w-100" alt="..."
+              height="600">
           </div>
           <div class="carousel-item">
             <img src="https://thasalacity.go.th/banner/photo/std210322_172306.jpg" class="d-block w-100" alt="..."
@@ -147,6 +189,124 @@
 
   <br><br>
 
+  <!-- project / activity image -->
+  <div class="container-md" style="
+  background: #17AADF;
+  background: -moz-linear-gradient(top, #17AADF 0%, #1363DF 50%, #992BCB 100%);
+  background: -webkit-linear-gradient(top, #17AADF 0%, #1363DF 50%, #992BCB 100%);
+  background: linear-gradient(to bottom, #17AADF 0%, #1363DF 50%, #992BCB 100%);
+  border-radius: 25px; padding: 50px;">
+    <center>
+      <h1 style="color:  white;">
+        <i class="fa-solid fa-image"></i>
+        โครงการ / ภาพกิจกรรม
+        <i class="fa-solid fa-image fa-flip-horizontal"></i>
+        <hr>
+      </h1>
+    </center>
+
+    <!-- card -->
+    <div class="container-md">
+      <div class="row" style="margin: 20px;">
+        <div class="col-md-4 d-flex ">
+          <div class="card" style="width: 18rem; margin-top: 20px; margin-bottom: 20px;">
+            <img src="https://thasalacity.go.th/album/picture/b_0091122_161721.jpg" class="card-img-top" alt="..."
+              style="width: auto; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 d-flex">
+          <div class="card" style="width: 18rem; margin-top: 20px; margin-bottom: 20px;">
+            <img src="https://thasalacity.go.th/album/picture/b_0091122_161114.jpg" class="card-img-top" alt="..."
+              style="width: auto; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's
+                content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 d-flex">
+          <div class="card" style="width: 18rem; margin-top: 20px; margin-bottom: 20px;">
+            <img src="https://thasalacity.go.th/album/picture/b_0091122_160922.jpg" class="card-img-top" alt="..."
+              style="width: auto; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's
+                content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row" style="margin: 20px; ">
+        <div class="col-md-4 d-flex">
+          <div class="card" style="width: 18rem; margin-top: 20px; margin-bottom: 20px; ">
+            <img src="https://thasalacity.go.th/album/picture/b_0091122_160747.jpg" class="card-img-top" alt="..."
+              style="width: auto; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex">
+          <div class="card" style="width: 18rem; margin-top: 20px; margin-bottom: 20px;">
+            <img src="https://thasalacity.go.th/album/picture/b_0100622_091718.jpg" class="card-img-top" alt="..."
+              style="width: auto; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's
+                content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 d-flex">
+          <div class="card" style="width: 18rem; margin-top: 20px; margin-bottom: 20px;">
+            <img src="https://thasalacity.go.th/album/picture/b_0290422_140955.jpg" class="card-img-top" alt="..."
+              style="width: auto; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's
+                content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <br><br>
+
   <!-- multimedia -->
   <div class="container-md" style="padding: 5%; 
   background: #17AADF;
@@ -155,19 +315,23 @@
   background: linear-gradient(to bottom, #17AADF 0%, #1363DF 50%, #992BCB 100%);
   border-radius: 25px;">
     <div class="row">
-      <div class="col">
+
+      <div class="col-md-6">
         <iframe
           src="https://www.facebook.com/plugins/video.php?height=420&href=https%3A%2F%2Fwww.facebook.com%2F100064293236978%2Fvideos%2F1716081551740391%2F&show_text=false&width=560&t=0"
           width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
           allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowFullScreen="true"></iframe>
+          allowFullScreen="true" class="container-md">
+        </iframe>
+
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/k4cdYS9nQZc" title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
+          allowfullscreen class="container-md"></iframe>
       </div>
+
     </div>
   </div>
 
