@@ -217,8 +217,8 @@ function showStudentCreateBox() {
   Swal.fire({
     title: 'Create Sleep Transaction',
     html: 
-    '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
-      '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
+    // '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
+    //   '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
 
       '<div class="mb-3"><label for="Year" class="form-label">Recorded Year</label>' +
       '<input class="form-control" id="Year" placeholder="Year (eg.2002)"></div>' +
@@ -239,7 +239,7 @@ function showStudentCreateBox() {
       // '<input class="form-control" id="age_group" placeholder="Surname"></div>' 
       `<select class="form-control" id="age_group">
         <option value="" disabled selected>Please Select...</option>
-        <option value="	15 years and over">	15 years and over</option>
+        <option value="15 years and over">	15 years and over</option>
         <option value="15 to 24 years">15 to 24 years</option>
         <option value="25 to 34 years">25 to 34 years</option>
         <option value="35 to 44 years">35 to 44 years</option>
@@ -288,15 +288,15 @@ function slistCreate() {
     // Savings: Savings,
     // GPA: GPA,
     // Salary: Salary,
-    Year: Year,
-    Avg: Avg,
-    TOD: TOD,
-    age_group: age_group,
-    sex: sex
+    "Year": Year,
+    "Avg hrs per day sleeping": Avg,
+    "Type of Days": TOD,
+    "Age Group": age_group,
+    "Sex": sex
 
   }));
 
-  //failed
+  //pass
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "http://localhost:4596/sleepdata/create");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -311,11 +311,11 @@ function slistCreate() {
     // Savings: Savings,
     // GPA: GPA,
     // Salary: Salary,
-    Year: Year,
-    Avg: Avg,
-    TOD: TOD,
-    age_group: age_group,
-    sex: sex
+    "Year": Year,
+    "Avg hrs per day sleeping": Avg,
+    "Type of Days": TOD,
+    "Age Group": age_group,
+    "Sex": sex
 
   }));
 
@@ -357,7 +357,7 @@ function studentDelete(id) {
 function showStudentUpdateBox(id) {
   console.log("edit", id);
   const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:3000/slist/" + id);
+  xhttp.open("GET", "http://localhost:4596/sleepdata/" + id);
   xhttp.send();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -365,38 +365,79 @@ function showStudentUpdateBox(id) {
       console.log("showStudentUpdateBox", object);
       Swal.fire({
         title: 'Update Student Transaction',
-        html: '<input id="id" class="swal2-input" placeholder="OID" type="hidden" value="' + object['_id'] + '"><br>' +
+        // html: '<input id="id" class="swal2-input" placeholder="OID" type="hidden" value="' + object['_id'] + '"><br>' +
 
-          '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
-          '<input class="form-control" id="Created_Date" placeholder="Created_Date" value="' + object['Created_Date'] + '"></div>' +
+        //   '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
+        //   '<input class="form-control" id="Created_Date" placeholder="Created_Date" value="' + object['Created_Date'] + '"></div>' +
 
-          '<div class="mb-3"><label for="StudentID" class="form-label">Student ID</label>' +
-          '<input class="form-control" id="StudentID" placeholder="StudentID" value="' + object['StudentID'] + '"></div>' +
+        //   '<div class="mb-3"><label for="StudentID" class="form-label">Student ID</label>' +
+        //   '<input class="form-control" id="StudentID" placeholder="StudentID" value="' + object['StudentID'] + '"></div>' +
 
-          '<div class="mb-3"><label for="Title" class="form-label">Title</label>' +
-          '<input class="form-control" id="Title" placeholder="Title" value="' + object['Title'] + '"></div>' +
+        //   '<div class="mb-3"><label for="Title" class="form-label">Title</label>' +
+        //   '<input class="form-control" id="Title" placeholder="Title" value="' + object['Title'] + '"></div>' +
 
-          '<div class="mb-3"><label for="Name" class="form-label">Name</label>' +
-          '<input class="form-control" id="Name" placeholder="Name" value="' + object['Name'] + '"></div>' +
+        //   '<div class="mb-3"><label for="Name" class="form-label">Name</label>' +
+        //   '<input class="form-control" id="Name" placeholder="Name" value="' + object['Name'] + '"></div>' +
 
-          '<div class="mb-3"><label for="Surname" class="form-label">Surname</label>' +
-          '<input class="form-control" id="Surname" placeholder="Surname" value="' + object['Surname'] + '"></div>' +
+        //   '<div class="mb-3"><label for="Surname" class="form-label">Surname</label>' +
+        //   '<input class="form-control" id="Surname" placeholder="Surname" value="' + object['Surname'] + '"></div>' +
 
-          '<div class="mb-3"><label for="Field" class="form-label">Field</label>' +
-          '<input class="form-control" id="Field" placeholder="Field" value="' + object['Field'] + '"></div>' +
+        //   '<div class="mb-3"><label for="Field" class="form-label">Field</label>' +
+        //   '<input class="form-control" id="Field" placeholder="Field" value="' + object['Field'] + '"></div>' +
 
-          '<div class="mb-3"><label for="Project" class="form-label">Project</label>' +
-          '<input class="form-control" id="Project" placeholder="Project" value="' + object['Project'] + '"></div>' +
+        //   '<div class="mb-3"><label for="Project" class="form-label">Project</label>' +
+        //   '<input class="form-control" id="Project" placeholder="Project" value="' + object['Project'] + '"></div>' +
 
-          '<div class="mb-3"><label for="Savings" class="form-label">Savings</label>' +
-          '<input class="form-control" id="Savings" placeholder="Savings" value="' + object['Savings'] + '"></div>' +
+        //   '<div class="mb-3"><label for="Savings" class="form-label">Savings</label>' +
+        //   '<input class="form-control" id="Savings" placeholder="Savings" value="' + object['Savings'] + '"></div>' +
 
 
-          '<div class="mb-3"><label for="GPA" class="form-label">GPA</label>' +
-          '<input class="form-control" id="GPA" placeholder="GPA" value="' + object['GPA'] + '"></div>' +
+        //   '<div class="mb-3"><label for="GPA" class="form-label">GPA</label>' +
+        //   '<input class="form-control" id="GPA" placeholder="GPA" value="' + object['GPA'] + '"></div>' +
 
-          '<div class="mb-3"><label for="Salary" class="form-label">Salary</label>' +
-          '<input class="form-control" id="Salary" placeholder="Salary" value="' + object['Salary'] + '"></div>',
+        //   '<div class="mb-3"><label for="Salary" class="form-label">Salary</label>' +
+        //   '<input class="form-control" id="Salary" placeholder="Salary" value="' + object['Salary'] + '"></div>'
+        
+      html:
+      // '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
+      // '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
+      '<input id="id" class="swal2-input" placeholder="OID" type="hidden" value="' + object['_id'] + '"><br>' +
+      '<div class="mb-3"><label for="Year" class="form-label">Recorded Year</label>' +
+      '<input class="form-control" id="Year" placeholder="Year (eg.2002)"></div>' +
+
+      '<div class="mb-3"><label for="Avg" class="form-label">Average Sleeping Hours / Day</label>' +
+      '<input class="form-control" id="Avg" placeholder="Hours (eg.8)"></div>' +
+
+      '<div class="mb-3"><label for="TOD" class="form-label">Type of Day</label>' +
+      // '<input class="form-control" id="TOD" placeholder="Name"></div>' +
+      `<select class="form-control" id="TOD">
+        <option value="" disabled selected>Please Select...</option>
+        <option value="All days">All days</option>
+        <option value="Nonholiday weekdays">Nonholiday weekdays</option>
+        <option value="Weekend days and holidays">Weekend days and holidays</option>
+      </select></div>` +
+
+      '<div class="mb-3"><label for="age_group" class="form-label">Age Group</label>' +
+      // '<input class="form-control" id="age_group" placeholder="Surname"></div>' 
+      `<select class="form-control" id="age_group">
+        <option value="" disabled selected>Please Select...</option>
+        <option value="15 years and over">	15 years and over</option>
+        <option value="15 to 24 years">15 to 24 years</option>
+        <option value="25 to 34 years">25 to 34 years</option>
+        <option value="35 to 44 years">35 to 44 years</option>
+        <option value="45 to 54 years">45 to 54 years</option>
+      </select></div>`
+      +
+
+      '<div class="mb-3"><label for="sex" class="form-label">Sex</label>' +
+      // '<input class="form-control" id="sex" placeholder="Sex"></div>' 
+      `<select class="form-control" id="sex">
+        <option value="" disabled selected>Please Select...</option>
+        <option value="Men">Men</option>
+        <option value="Women">Women</option>
+        <option value="Both">Both</option>
+      </select></div>`
+      ,
 
         focusConfirm: false,
         preConfirm: () => {
@@ -410,48 +451,65 @@ function showStudentUpdateBox(id) {
 
 function studentUpdate() {
 
+  // const id = document.getElementById("id").value;
+  // const Created_Date = document.getElementById('Created_Date').value;
+  // const StudentID = document.getElementById('StudentID').value;
+  // const Title = document.getElementById('Title').value;
+  // const Name = document.getElementById('Name').value;
+  // const Surname = document.getElementById('Surname').value;
+  // const Field = document.getElementById('Field').value;
+  // const Project = document.getElementById('Project').value;
+  // const Savings = document.getElementById('Savings').value;
+  // const GPA = document.getElementById('GPA').value;
+  // const Salary = document.getElementById('Salary').value;
+
   const id = document.getElementById("id").value;
-  const Created_Date = document.getElementById('Created_Date').value;
-  const StudentID = document.getElementById('StudentID').value;
-  const Title = document.getElementById('Title').value;
-  const Name = document.getElementById('Name').value;
-  const Surname = document.getElementById('Surname').value;
-  const Field = document.getElementById('Field').value;
-  const Project = document.getElementById('Project').value;
-  const Savings = document.getElementById('Savings').value;
-  const GPA = document.getElementById('GPA').value;
-  const Salary = document.getElementById('Salary').value;
+  const Year = document.getElementById('Year').value;
+  const Avg = document.getElementById('Avg').value;
+  const TOD = document.getElementById('TOD').value;
+  const age_group = document.getElementById('age_group').value;
+  const sex = document.getElementById('sex').value; 
 
   console.log(JSON.stringify({
     "_id": id,
-    Created_Date: Created_Date,
-    StudentID: StudentID,
-    Title: Title,
-    Name: Name,
-    Surname: Surname,
-    Field: Field,
-    Project: Project,
-    Savings: Savings,
-    GPA: GPA,
-    Salary: Salary,
+    // Created_Date: Created_Date,
+    // StudentID: StudentID,
+    // Title: Title,
+    // Name: Name,
+    // Surname: Surname,
+    // Field: Field,
+    // Project: Project,
+    // Savings: Savings,
+    // GPA: GPA,
+    // Salary: Salary,
+    "Year": Year,
+    "Avg hrs per day sleeping": Avg,
+    "Type of Days": TOD,
+    "Age Group": age_group,
+    "Sex": sex
   }));
 
 
   const xhttp = new XMLHttpRequest();
-  xhttp.open("PUT", "http://localhost:3000/slist/update");
+  xhttp.open("PUT", "http://localhost:4596/sleepdata/update");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(JSON.stringify({
     "_id": id,
-    Created_Date: Created_Date,
-    StudentID: StudentID,
-    Title: Title,
-    Name: Name,
-    Surname: Surname,
-    Field: Field,
-    Project: Project,
-    Savings: Savings,
-    GPA: GPA,
-    Salary: Salary,
+    // Created_Date: Created_Date,
+    // StudentID: StudentID,
+    // Title: Title,
+    // Name: Name,
+    // Surname: Surname,
+    // Field: Field,
+    // Project: Project,
+    // Savings: Savings,
+    // GPA: GPA,
+    // Salary: Salary,
+    "Year": Year,
+    "Avg hrs per day sleeping": Avg,
+    "Type of Days": TOD,
+    "Age Group": age_group,
+    "Sex": sex
   }));
 
 
