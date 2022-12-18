@@ -403,19 +403,29 @@ function showStudentUpdateBox(id) {
       // '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
       '<input id="id" class="swal2-input" placeholder="OID" type="hidden" value="' + object['_id'] + '"><br>' +
       '<div class="mb-3"><label for="Year" class="form-label">Recorded Year</label>' +
-      '<input class="form-control" id="Year" placeholder="Year (eg.2002)"></div>' +
+      '<input class="form-control" id="Year" placeholder="Year (eg.2002)" value="' + object['Year'] + '"></div>' +
 
       '<div class="mb-3"><label for="Avg" class="form-label">Average Sleeping Hours / Day</label>' +
-      '<input class="form-control" id="Avg" placeholder="Hours (eg.8)"></div>' +
+      '<input class="form-control" id="Avg" placeholder="Hours (eg.8)" value="' + object['Avg hrs per day sleeping'] + '"></div>' +
+
 
       '<div class="mb-3"><label for="TOD" class="form-label">Type of Day</label>' +
+
       // '<input class="form-control" id="TOD" placeholder="Name"></div>' +
-      `<select class="form-control" id="TOD">
-        <option value="" disabled selected>Please Select...</option>
-        <option value="All days">All days</option>
-        <option value="Nonholiday weekdays">Nonholiday weekdays</option>
-        <option value="Weekend days and holidays">Weekend days and holidays</option>
-      </select></div>` +
+
+      // '<script>'+
+      //   'var selectElement = document.getElementById("TOD").value;'+
+      //   'selectElement.value = object["Type of Days"];'+
+      //    element.setAttribute("class", "democlass");
+      // '</script>'+
+
+      '<select class="form-control" id="TOD">'+
+        '<option value="" disabled >Please Select...</option>'+
+        '<option value="All days">All days</option>'+
+        '<option value="Nonholiday weekdays">Nonholiday weekdays</option>'+
+        '<option value="Weekend days and holidays">Weekend days and holidays</option>'+
+      '</select></div>' +
+
 
       '<div class="mb-3"><label for="age_group" class="form-label">Age Group</label>' +
       // '<input class="form-control" id="age_group" placeholder="Surname"></div>' 

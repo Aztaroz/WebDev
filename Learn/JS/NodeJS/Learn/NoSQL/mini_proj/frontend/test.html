@@ -1,0 +1,87 @@
+<!-- <script>
+    // First, retrieve the data from MongoDB
+    var allday = { "Type of Days": "All days" };
+    var non_holiday = { "Type of Days": "Nonholiday weekdays" };
+    var Weekend = { "Type of Days": "Weekend days and holidays" };
+
+  
+    // Next, get a reference to the select element
+    var selectElement = document.getElementById("TOD");
+  
+    // Iterate through the options in the select element
+    for (var i = 0; i < selectElement.options.length; i++) {
+      // If the option value matches the value in the object, set it as the selected option
+      if (selectElement.options[i].value == object["Type of Days"]) {
+        selectElement.options[i].selected = true;
+        break;
+      }
+    }
+  </script> -->
+
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        
+  </head>
+  <body>
+    <select class="form-control" id="TOD" name="TOD" onload="select_option()">
+        <option value="none" disabled selected>Please Select...</option>
+        <option value="All days" id="alldays">All days</option>
+        <option value="Nonholiday weekdays" id="nonholiday">Nonholiday weekdays</option>
+        <option value="Weekend days and holidays">Weekend days and holidays</option>
+      </select></div>
+
+      <button onclick="select_option()"></button>
+
+      <script>
+        // function select_option(){}
+        function select_option(){
+            
+        }
+
+        // opt1.value = "1";
+        // opt1.text = "Option: Value 1";
+
+        // opt2.value = "2";
+        // opt2.text = "Option: Value 2";
+
+        // sel.add(opt1, null);
+        // sel.add(opt2, null);
+
+
+/*      
+  Produces the following, conceptually:
+
+  <select>
+    <option value="1">Option: Value 1</option>
+    <option value="2">Option: Value 2</option>
+  </select>
+*/
+
+
+        // function submit(){
+        //     const a = document.getElementById("TOD").value
+        //     console.log(a)
+        // }
+        // Get the element with an ID of "myDiv"
+        // var alldays = document.getElementById("alldays");
+        // var non_holiday = document.getElementById("nonholiday");
+        // console.log(non_holiday)
+
+        // document.getElementById('TOD').value = "Test";
+
+
+        // Set the "title" attribute of the element
+        // non_holiday.setAttribute("selected", "selected");
+
+
+
+        
+    </script>
+  </body>
+  </html>
