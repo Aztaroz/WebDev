@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <p><span id="data1"></span></p>
+    <p><span id="data2"></span></p></marquee>
+    <script>
+        const url = "http://localhost:3000/user"
+        fetch(url,{
+            method: 'GET'
+        }).then( (r) =>{
+            return r.json()
+        }).then( (res)=>{
+            //console.log(JSON.stringify(res))
+            var data1 = document.getElementById("data1")
+            data1.textContent = JSON.stringify(res) 
+
+            var data2 = document.getElementById("data2")
+            data2.textContent = res[0].email
+        } )
+    </script> -->
+    <script>
+        function btn_add(){
+            const data = {
+                "name": document.getElementById("name"),
+                "email": document.getElementById("surname")
+            }
+
+            const url = "http://localhost:3000/user"
+            fetch (url,{
+                method: "POST",
+                headers:{
+                    'Accept': "application/json, text/plain, */*",
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then((r)=>{return r.json}).then ((res)=>{
+                console.log(res)
+            })
+        }
+    </script>
+    <input type="text" placeholder="Name" id="name">
+    <input type="text" placeholder="Surname" id="surname">
+    <button onclick="btn_add()">
+        Add
+    </button>
+</body>
+</html>

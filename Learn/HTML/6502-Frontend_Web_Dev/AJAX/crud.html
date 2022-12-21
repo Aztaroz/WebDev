@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Document</title>
+    <script>
+
+        function btn_delete (){
+            var uid = 9
+        }
+
+        function btn_add_click(){
+            const url = "http://localhost:3000/user";
+            const data = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value
+            };
+            fetch(url, {
+                method: "POST",
+                headers : {
+                    "Accept" : "application/json, text/plain, /",
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then((r)=>{
+                return r.json();
+            }).then((res)=>{
+                console.log(res);
+                body_load()
+            });
+        }
+        
+
+        function body_load(){
+            //alert("Hello")
+            const url = "http://localhost:3000/user";
+            fetch(url, {method: "GET"})
+            .then((r)=>{
+                return r.json();
+            }).then((res)=>{
+                console.log(res);
+
+                var table = document.getElementById("tblData");
+                table.innerHTML = ""
+                for(var i = 0; i< res.length; i++){
+                    var row = table.insertRow();
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+
+                    const item = res[i];
+                    cell1.innerHTML = item.id;
+                    cell2.innerHTML = item.name;
+                    cell3.innerHTML = item.email;
+                }
+
+               
+            });
+        }
+    </script>
+</head>
+<body onload="body_load()">
+    <div class="container">
+        <h1>CRUD Data</h1>
+        <dive>
+            <span id="uid"></span>
+            <input type="text" class="form-contro;" id="name" />
+            <input type="text" class="form-contro;" id="email">
+            <button id=""btn_add" class="btn btn-primary" onclick="btn_add_click()">Add</button>
+        </dive>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="tblData">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

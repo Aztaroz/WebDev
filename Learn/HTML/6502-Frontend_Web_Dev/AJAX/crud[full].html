@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+
+    <script>
+        function body_load(){
+            const url = "http://localhost:3000/users";
+
+            fetch(url, { method:"GET"})
+                .then( (r)=>{ return r.json()} )
+                .then ( (res)=>{
+                    console.log(res)
+
+                    var table = document.getElementById("tblData");
+                    
+                    table.innerHTML ="";
+
+                    for(var i = 0; i < res.length; i++){
+                        var row = table.insertRow();
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        const item = res[i];
+                        cell1.innerHTML = item.id;
+                        cell2.innerHTML = item.name;
+                        cell3.innerHTML = item.email; 
+                        cell4.innerHTML = "<button class='btn btn-primary' onclick='item_dele(" + item.id + ")'>D</button>"
+                        + " <button class='btn btn-primary' onclick='item_edit(" + item.id + ")'>E</button>"
+                    }
+                });
+        }
+/*
+        window.addEventListener("load", (event) => {
+            console.log("page is fully loaded");
+        });
+*/
+
+        function btn_add_click(){
+            const data = {
+                	"name": document.getElementById('name').value,
+	                "email": document.getElementById('email').value
+            };
+            const url = "http://localhost:3000/users";
+            fetch(url,  {
+                method : "POST",
+                headers:{
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(  (r)=>{ return r.json()})
+            .then( (res)=>{
+                console.log(res);
+                body_load();
+            })
+        }
+    
+        function item_dele( uid ){
+            var x = confirm("Sure?");
+            if (x){
+                const url = "http://localhost:3000/users/" + uid;
+                fetch(url, {
+                    method: "DELETE"
+                }).then(  (r)=>{ return r.json()})
+                .then( (res)=>{
+                    console.log(res);
+                    body_load();
+                })
+            }
+        }
+
+        function item_edit( uid ){
+            //alert(uid)
+            const url = "http://localhost:3000/users/" + uid;
+            fetch(url, {
+                method: "GET"
+            }).then( (r)=>{
+                return r.json();
+            }).then( (res)=>{
+               //alert(JSON.stringify(res));
+               var user_id = document.getElementById('uid'); 
+               var name = document.getElementById('name');
+                var email = document.getElementById('email');
+                user_id.value = res.id;
+                name.value = res.name;
+                email.value = res.email;
+
+            })
+        }
+
+        function btn_save_click(){
+            var uid = document.getElementById('uid').value;
+            const data = {
+                	"name": document.getElementById('name').value,
+	                "email": document.getElementById('email').value
+            };
+            const url = "http://localhost:3000/users/" + uid;
+            console.log(url);
+            fetch(url,  {
+                method : "PUT",
+                headers:{
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(  (r)=>{ return r.json()})
+            .then( (res)=>{
+                console.log(res);
+                body_load();
+            })
+
+        }
+    </script>
+
+</head>
+<body  onload="body_load()">
+    <div class="container">
+        <h1>CRUD data</h1>
+        <div>
+            
+            <input type="hidden" id="uid" />
+            <input type="text" class="form-control" id="name" />
+            <input type="text" class="form-control" id="email">
+            <button id="btn_add" class="btn btn-primary" onclick="btn_add_click()"> Add </button>
+            <button id="btn_save" class="btn btn-info" onclick="btn_save_click()"> Save </button>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tblData">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "fruit": [
+    {
+      "id": 1,
+      "product_name": "Apple ",
+      "price": "20",
+      "currency": "THB",
+      "quantity": "20",
+      "unit": "pcs"
+    }
+  ]
+}

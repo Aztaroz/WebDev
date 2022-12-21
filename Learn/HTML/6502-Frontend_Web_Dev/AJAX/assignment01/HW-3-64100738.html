@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+
+
+    <script>
+        
+
+        function getdata() {
+            const apikey = '3230480538b75563ef84567e6cfe217e'
+            const lat = document.getElementById("lat").value
+            const lon = document.getElementById("lon").value
+            const url =  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}`
+
+            const place = document.getElementById("place")
+            const temp = document.getElementById("temp")
+            const humidity = document.getElementById("humidity")
+            const sunrise = document.getElementById("sunrise")
+            const sunset = document.getElementById("sunset")
+            const current = document.getElementById("current")
+
+            
+            fetch(url)
+                .then(response =>response.json())
+                .then(data => {
+                    place.innerHTML = data.name;
+                    
+                    const temp_celsius = data.main.temp - 273.15;
+                    temp.innerHTML = temp_celsius.toFixed(2)
+
+                    humidity.innerHTML = data.main.humidity
+
+
+
+                    function unixTimestampToTime(timestamp) {
+                        const date = new Date(timestamp * 1000);
+                        const hours = date.getHours().toString().padStart(2, '0');
+                        const minutes = date.getMinutes().toString().padStart(2, '0');
+                        const seconds = date.getSeconds().toString().padStart(2, '0');
+                        return `${hours}:${minutes}:${seconds}`;
+                    }
+                    const sunrise_timestamp = data.sys.sunrise;
+                    sunrise.innerHTML = unixTimestampToTime(sunrise_timestamp)
+
+                    const sunset_timestamp = data.sys.sunset
+                    sunset.innerHTML = unixTimestampToTime(sunset_timestamp)
+
+
+                    function unixTimestampToDateTime(timestamp) {
+                        const date = new Date(timestamp * 1000);
+                        const year = date.getFullYear();
+                        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                        const day = date.getDate().toString().padStart(2, '0');
+                        const hours = date.getHours().toString().padStart(2, '0');
+                        const minutes = date.getMinutes().toString().padStart(2, '0');
+                        const seconds = date.getSeconds().toString().padStart(2, '0');
+                        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                        }
+
+                    const current_timestamp = data.dt
+                    current.innerHTML = unixTimestampToDateTime(current_timestamp)
+
+
+                    console.log(data.dt)
+                })
+                .catch(error => {
+                    console.error('Error:', error)
+                })
+
+                console.log("lat = "+lat+"\nlon = "+lon)
+        }
+
+    </script>
+
+</head>
+<body>
+    <input class="form-control form-control-lg" type="text" placeholder="Input your Latitude Here" id="lat">
+    <input class="form-control form-control-lg" type="text" placeholder="Input your Longtitude Here" id="lon">  
+    <br>
+    <button type="button" class="btn btn-primary btn-lg" onclick="getdata()">OK!</button>
+    <br><br>
+    <div class="card" style="width: 18rem;">
+        <img src="https://www.history.com/.image/t_share/MTU3ODc4NjAzNTEyNjg1ODk3/hith-tokyo-istock_000008304153large-2.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" id="place"></h5>
+          <p class="card-text">อุณหภูมิ <span  id="temp"></span></p>
+          <p class="card-text">ความชื้นสัมพัทธ์ <br><span  id="humidity"></span></p>
+          <p class="card-text">ดวงอาทิตย์ขึ้นเวลา <br><span  id="sunrise"></span></p>
+          <p class="card-text">ดวงอาทิตย์ตกเวลา <br><span  id="sunset"></span></p>
+          <p class="card-text">ณ วันที่ <br><span  id="current"></span></p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+</body>
+</html>
