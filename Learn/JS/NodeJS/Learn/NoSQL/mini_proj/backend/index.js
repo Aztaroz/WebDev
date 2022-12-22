@@ -1,8 +1,3 @@
-google.charts.load("current", {
-  packages: ["corechart", "bar"],
-});
-google.charts.setOnLoadCallback(loadTable);
-
 //done
 function loadTable() {
   $.ajax({
@@ -31,7 +26,8 @@ function loadTable() {
       }
 
       document.getElementById("mytable").innerHTML = trHTML;
-      loadGraph();
+
+      // loadGraph()
     }
   });
 }
@@ -112,114 +108,145 @@ function loadQueryTable() {
 }
 
 //Do it later
-function loadGraph() {
-  var mlCount = 0;
-  var fullsCount = 0;
-  var sysCount = 0;
-  var netwCount = 0;
+// function loadGraph() {
+//   var mlCount = 0;
+//   var fullsCount = 0;
+//   var sysCount = 0;
+//   var netwCount = 0;
 
-  var mrCount = 0;
-  var missCount = 0;
-  var drCount = 0;
-  var pfCount = 0;
+//   var mrCount = 0;
+//   var missCount = 0;
+//   var drCount = 0;
+//   var pfCount = 0;
 
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:4956/sleepdata");
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      const objects = JSON.parse(this.responseText);
+//   const xhttp = new XMLHttpRequest();
+//   xhttp.open("GET", "http://localhost:4956/sleepdata");
+//   xhttp.send();
+//   xhttp.onreadystatechange = function () {
+//     if (this.readyState == 4 && this.status == 200) {
+//       const objects = JSON.parse(this.responseText);
+
+
+//       //Pie chart
+//       for (let object of objects) {
+//         switch (object["Project"]) {
+//           case "Machine Learning":
+//             mlCount = mlCount + 1;
+//             break;
+//           case "Fullstack":
+//             fullsCount = fullsCount + 1;
+//             break;
+
+//           case "System Design":
+//             sysCount = sysCount + 1;
+//             break;
+
+//           case "Networks":
+//             netwCount = netwCount + 1;
+//             break;
+//         }
+
+//         switch (object["Title"]) {
+//           case "นาย":
+//             mrCount = mrCount + 1;
+//             break;
+//           case "นางสาว":
+//             missCount = missCount + 1;
+//             break;
+
+//           case "ดร.":
+//             drCount = drCount + 1;
+//             break;
+
+//           case "ศ.ดร":
+//             pfCount = pfCount + 1;
+//             break;
+//         }
+//       }
+
+//       var TimelyResponseData = google.visualization.arrayToDataTable([
+//         ["Project", "Field"],
+//         ["Machine Learning", mlCount],
+//         ["Fullstack", fullsCount],
+//         ["System Design", sysCount],
+//         ["Networks", netwCount],
+//       ]);
+
+//       var optionsTimelyResponse = { Titil: "Overall Project Fields" };
+//       var chartTimelyResponse = new google.visualization.PieChart(document.getElementById("piechartTimelyResponse"));
+//       chartTimelyResponse.draw(TimelyResponseData, optionsTimelyResponse);
+
+//       //barchart
+//       var dataSubmitted = google.visualization.arrayToDataTable([
+//         [
+//           "Student Titile",
+//           "Number",
+//           {
+//             role: "style",
+//           },
+//           {
+//             role: "annotation",
+//           },
+//         ],
+//         ["นาย", mrCount, "gold", "นาย"],
+//         ["นางสาว", missCount, "color: #F65A83", "นางสาว"],
+//         ["ดร.", drCount, "color: #F9F5EB", "ดร."],
+//         ["ศ.ดร", pfCount, "color: #607EAA", "ศ.ดร"]
+//       ]);
+
+//       var optionSubmitted = {
+//         title: "Staff' Title",
+//         legend: { position: "none" },
+//       };
+
+//       var chartSubmitted = new google.visualization.BarChart(document.getElementById("barchartSubmitted"));
+//       chartSubmitted.draw(dataSubmitted, optionSubmitted);
+//     }
+//   };
+// }
+
+// function loadGraph() {
+
+//   const xhttp = new XMLHttpRequest();
+//   xhttp.open("GET", "http://localhost:4596/sleepdata");
+//   xhttp.send();
+//   xhttp.onreadystatechange = function () {
+//     if (this.readyState == 4 && this.status == 200) {
+//       const objects = JSON.parse(this.responseText);
+
       
-      
-      //Pie chart
-      for (let object of objects) {
-        switch (object["Project"]) {
-          case "Machine Learning":
-            mlCount = mlCount + 1;
-            break;
-          case "Fullstack":
-            fullsCount = fullsCount + 1;
-            break;
+//         var data = google.visualization.arrayToDataTable([
+//           ['Year', 'Sales', 'Expenses'],
+//           ['2004', 1000, 400],
+//           ['2005', 1170, 460],
+//           ['2006', 660, 1120],
+//           ['2007', 1030, 540]
+//         ]);
 
-          case "System Design":
-            sysCount = sysCount + 1;
-            break;
 
-          case "Networks":
-            netwCount = netwCount + 1;
-            break;
-        }
+//         var options = {
+//           title: 'Company Performance',
+//           curveType: 'function',
+//           legend: { position: 'bottom' }
+//         };
 
-        switch (object["Title"]) {
-          case "นาย":
-            mrCount = mrCount + 1;
-            break;
-          case "นางสาว":
-            missCount = missCount + 1;
-            break;
+//         var chart = new google.visualization.LineChart(document.getElementById('piechartTimelyResponse'));
 
-          case "ดร.":
-            drCount = drCount + 1;
-            break;
+//         chart.draw(data, options);
 
-          case "ศ.ดร":
-            pfCount = pfCount + 1;
-            break;
-        }
-      }
+//     }
 
-      var TimelyResponseData = google.visualization.arrayToDataTable([
-        ["Project", "Field"],
-        ["Machine Learning", mlCount],
-        ["Fullstack", fullsCount],
-        ["System Design", sysCount],
-        ["Networks", netwCount],
-      ]);
-
-      var optionsTimelyResponse = { Titil: "Overall Project Fields" };
-      var chartTimelyResponse = new google.visualization.PieChart(document.getElementById("piechartTimelyResponse"));
-      chartTimelyResponse.draw(TimelyResponseData, optionsTimelyResponse);
-      
-      //barchart
-      var dataSubmitted = google.visualization.arrayToDataTable([
-        [
-          "Student Titile",
-          "Number",
-          {
-            role: "style",
-          },
-          {
-            role: "annotation",
-          },
-        ],
-        ["นาย", mrCount, "gold", "นาย"],
-        ["นางสาว", missCount, "color: #F65A83", "นางสาว"],
-        ["ดร.", drCount, "color: #F9F5EB", "ดร."],
-        ["ศ.ดร", pfCount, "color: #607EAA", "ศ.ดร"]
-      ]);
-
-      var optionSubmitted = {
-        title: "Staff' Title",
-        legend: { position: "none" },
-      };
-
-      var chartSubmitted = new google.visualization.BarChart(document.getElementById("barchartSubmitted"));
-      chartSubmitted.draw(dataSubmitted, optionSubmitted);
-    }
-  };
-}
-
+//   }
+// }
 
 function showStudentCreateBox() {
   var d = new Date();
   const date = d.toISOString().split('T')[0];
-
   Swal.fire({
     title: 'Create Sleep Transaction',
-    html: 
-    // '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
-    //   '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
-
+    html:
+      // '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
+      //   '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
       '<div class="mb-3"><label for="Year" class="form-label">Recorded Year</label>' +
       '<input class="form-control" id="Year" placeholder="Year (eg.2002)"></div>' +
 
@@ -255,7 +282,7 @@ function showStudentCreateBox() {
         <option value="Women">Women</option>
         <option value="Both">Both</option>
       </select></div>`
-      ,
+    ,
 
     focusConfirm: false,
     preConfirm: () => {
@@ -271,7 +298,7 @@ function slistCreate() {
   const Avg = document.getElementById('Avg').value;
   const TOD = document.getElementById('TOD').value;
   const age_group = document.getElementById('age_group').value;
-  const sex = document.getElementById('sex').value; 
+  const sex = document.getElementById('sex').value;
   // const Project = document.getElementById('Project').value;
   // const Savings = document.getElementById('Savings').value;
   // const GPA = document.getElementById('GPA').value;
@@ -363,6 +390,145 @@ function showStudentUpdateBox(id) {
     if (this.readyState == 4 && this.status == 200) {
       const object = JSON.parse(this.responseText).Complaint;
       console.log("showStudentUpdateBox", object);
+
+      switch (object['Type of Days']) {
+        case "All days":
+          TOD = `<option value="" disabled >Please Select...</option>
+                <option value="All days" selected>All days</option>
+                <option value="Nonholiday weekdays">Nonholiday weekdays</option>
+                <option value="Weekend days and holidays">Weekend days and holidays</option>`
+          console.log("case :" + object['Type of Days']);
+          break;
+        case "Nonholiday weekdays":
+          TOD = `<option value="" disabled >Please Select...</option>
+                <option value="All days">All days</option>
+                <option value="Nonholiday weekdays" selected>Nonholiday weekdays</option>
+                <option value="Weekend days and holidays">Weekend days and holidays</option>`
+          console.log("case :" + object['Type of Days']);
+          break;
+        case "Weekend days and holidays":
+          TOD = `<option value="" disabled >Please Select...</option>
+                <option value="All days">All days</option>
+                <option value="Nonholiday weekdays" >Nonholiday weekdays</option>
+                <option value="Weekend days and holidays"selected>Weekend days and holidays</option>`
+          console.log("case :" + object['Type of Days']);
+          break;
+      }
+
+      switch (object['Age Group']) {
+        case "15 years and over":
+          AOG = `<option value="" disabled>Please Select...</option>
+                <option value="15 years and over" selected>	15 years and over</option>
+                <option value="15 to 24 years">15 to 24 years</option>
+                <option value="25 to 34 years">25 to 34 years</option>
+                <option value="35 to 44 years">35 to 44 years</option>
+                <option value="45 to 54 years">45 to 54 years</option>
+                <option value="55 to 64 years">55 to 64 years</option>
+                <option value="65 years and over">65 years and over</option>`
+          console.log("case :" + object['Age Group']);
+          break;
+
+        case "15 to 24 years":
+          AOG = `<option value="" disabled>Please Select...</option>
+                <option value="15 years and over">15 years and over</option>
+                <option value="15 to 24 years" selected>15 to 24 years</option>
+                <option value="25 to 34 years">25 to 34 years</option>
+                <option value="35 to 44 years">35 to 44 years</option>
+                <option value="45 to 54 years">45 to 54 years</option>
+                <option value="55 to 64 years">55 to 64 years</option>
+                  <option value="65 years and over">65 years and over</option>`
+          console.log("case :" + object['Age Group']);
+          break;
+
+        case "25 to 34 years":
+          AOG = `<option value="" disabled>Please Select...</option>
+                  <option value="15 years and over">15 years and over</option>
+                  <option value="15 to 24 years">15 to 24 years</option>
+                  <option value="25 to 34 years" selected>25 to 34 years</option>
+                  <option value="35 to 44 years">35 to 44 years</option>
+                  <option value="45 to 54 years">45 to 54 years</option>
+                  <option value="55 to 64 years">55 to 64 years</option>
+                  <option value="65 years and over">65 years and over</option>`
+          console.log("case :" + object['Age Group']);
+          break;
+
+        case "35 to 44 years":
+          AOG = `<option value="" disabled>Please Select...</option>
+                  <option value="15 years and over">15 years and over</option>
+                  <option value="15 to 24 years">15 to 24 years</option>
+                  <option value="25 to 34 years">25 to 34 years</option>
+                  <option value="35 to 44 years" selected>35 to 44 years</option>
+                  <option value="45 to 54 years">45 to 54 years</option>
+                  <option value="55 to 64 years">55 to 64 years</option>
+                  <option value="65 years and over">65 years and over</option>`
+          console.log("case :" + object['Age Group']);
+          break;
+
+        case "45 to 54 years":
+          AOG = `<option value="" disabled>Please Select...</option>
+                  <option value="15 years and over">15 years and over</option>
+                  <option value="15 to 24 years">15 to 24 years</option>
+                  <option value="25 to 34 years">25 to 34 years</option>
+                  <option value="35 to 44 years">35 to 44 years</option>
+                  <option value="45 to 54 years" selected>45 to 54 years</option>
+                  <option value="55 to 64 years">55 to 64 years</option>
+                  <option value="65 years and over">65 years and over</option>`
+          console.log("case :" + object['Age Group']);
+          break;
+
+        case "55 to 64 years":
+          AOG = `<option value="" disabled>Please Select...</option>
+                  <option value="15 years and over">15 years and over</option>
+                  <option value="15 to 24 years">15 to 24 years</option>
+                  <option value="25 to 34 years">25 to 34 years</option>
+                  <option value="35 to 44 years">35 to 44 years</option>
+                  <option value="45 to 54 years">45 to 54 years</option>
+                  <option value="55 to 64 years" selected>55 to 64 years</option>
+                  <option value="65 years and over">65 years and over</option>`
+          console.log("case :" + object['Age Group']);
+          break;
+
+        case "65 years and over":
+          AOG = `<option value="" disabled>Please Select...</option>
+                  <option value="15 years and over">15 years and over</option>
+                  <option value="15 to 24 years">15 to 24 years</option>
+                  <option value="25 to 34 years">25 to 34 years</option>
+                  <option value="35 to 44 years">35 to 44 years</option>
+                  <option value="45 to 54 years">45 to 54 years</option>
+                  <option value="55 to 64 years">55 to 64 years</option>
+                  <option value="65 years and over"selected>65 years and over</option>`
+          console.log("case :" + object['Age Group']);
+          break;
+      }
+
+      switch (object['Sex']) {
+        case "Men":
+          SEX = `<option value="" disabled>Please Select...</option>
+                <option value="Men" selected>Men</option>
+                <option value="Women">Women</option>
+                <option value="Both">Both</option>`
+          console.log("case :" + object['Sex']);
+          break;
+
+        case "Women":
+          SEX = `<option value="" disabled>Please Select...</option>
+                <option value="Men">Men</option>
+                <option value="Women" selected>Women</option>
+                <option value="Both">Both</option>`
+          console.log("case :" + object['Sex']);
+          break;
+
+        case "Both":
+          SEX = `<option value="" disabled>Please Select...</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Both"selected>Both</option>`
+          console.log("case :" + object['Sex']);
+          break;
+
+      }
+
+
       Swal.fire({
         title: 'Update Student Transaction',
         // html: '<input id="id" class="swal2-input" placeholder="OID" type="hidden" value="' + object['_id'] + '"><br>' +
@@ -397,57 +563,51 @@ function showStudentUpdateBox(id) {
 
         //   '<div class="mb-3"><label for="Salary" class="form-label">Salary</label>' +
         //   '<input class="form-control" id="Salary" placeholder="Salary" value="' + object['Salary'] + '"></div>'
-        
-      html:
-      // '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
-      // '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
-      '<input id="id" class="swal2-input" placeholder="OID" type="hidden" value="' + object['_id'] + '"><br>' +
-      '<div class="mb-3"><label for="Year" class="form-label">Recorded Year</label>' +
-      '<input class="form-control" id="Year" placeholder="Year (eg.2002)" value="' + object['Year'] + '"></div>' +
 
-      '<div class="mb-3"><label for="Avg" class="form-label">Average Sleeping Hours / Day</label>' +
-      '<input class="form-control" id="Avg" placeholder="Hours (eg.8)" value="' + object['Avg hrs per day sleeping'] + '"></div>' +
+        html:
+          // '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
+          // '<input id="Created_Date" class="swal2-input" placeholder="Created_Date" type="hidden" value="' + date + '">' +
+          '<input id="id" class="swal2-input" placeholder="OID" type="hidden" value="' + object['_id'] + '"><br>' +
+          '<div class="mb-3"><label for="Year" class="form-label">Recorded Year</label>' +
+          '<input class="form-control" id="Year" placeholder="Year (eg.2002)" value="' + object['Year'] + '"></div>' +
 
-
-      '<div class="mb-3"><label for="TOD" class="form-label">Type of Day</label>' +
-
-      // '<input class="form-control" id="TOD" placeholder="Name"></div>' +
-
-      // '<script>'+
-      //   'var selectElement = document.getElementById("TOD").value;'+
-      //   'selectElement.value = object["Type of Days"];'+
-      //    element.setAttribute("class", "democlass");
-      // '</script>'+
-
-      '<select class="form-control" id="TOD">'+
-        '<option value="" disabled >Please Select...</option>'+
-        '<option value="All days">All days</option>'+
-        '<option value="Nonholiday weekdays">Nonholiday weekdays</option>'+
-        '<option value="Weekend days and holidays">Weekend days and holidays</option>'+
-      '</select></div>' +
+          '<div class="mb-3"><label for="Avg" class="form-label">Average Sleeping Hours / Day</label>' +
+          '<input class="form-control" id="Avg" placeholder="Hours (eg.8)" value="' + object['Avg hrs per day sleeping'] + '"></div>' +
 
 
-      '<div class="mb-3"><label for="age_group" class="form-label">Age Group</label>' +
-      // '<input class="form-control" id="age_group" placeholder="Surname"></div>' 
-      `<select class="form-control" id="age_group">
-        <option value="" disabled selected>Please Select...</option>
-        <option value="15 years and over">	15 years and over</option>
-        <option value="15 to 24 years">15 to 24 years</option>
-        <option value="25 to 34 years">25 to 34 years</option>
-        <option value="35 to 44 years">35 to 44 years</option>
-        <option value="45 to 54 years">45 to 54 years</option>
-      </select></div>`
-      +
+          '<div class="mb-3"><label for="TOD" class="form-label">Type of Day</label>' +
 
-      '<div class="mb-3"><label for="sex" class="form-label">Sex</label>' +
-      // '<input class="form-control" id="sex" placeholder="Sex"></div>' 
-      `<select class="form-control" id="sex">
-        <option value="" disabled selected>Please Select...</option>
-        <option value="Men">Men</option>
-        <option value="Women">Women</option>
-        <option value="Both">Both</option>
-      </select></div>`
-      ,
+          // '<input class="form-control" id="TOD" placeholder="Name"></div>' +
+
+          // '<script>'+
+          //   'var selectElement = document.getElementById("TOD").value;'+
+          //   'selectElement.value = object["Type of Days"];'+
+          //    element.setAttribute("class", "democlass");
+          // '</script>'+
+
+
+          '<select class="form-control" id="TOD">' +
+          // '<option value="" disabled >Please Select...</option>'+
+          // '<option value="All days">All days</option>'+
+          // '<option value="Nonholiday weekdays">Nonholiday weekdays</option>'+
+          // '<option value="Weekend days and holidays">Weekend days and holidays</option>'+
+          TOD +
+          '</select></div>' +
+
+
+          '<div class="mb-3"><label for="age_group" class="form-label">Age Group</label>' +
+          // '<input class="form-control" id="age_group" placeholder="Surname"></div>' 
+          '<select class="form-control" id="age_group">' +
+          AOG +
+          '</select></div>' +
+
+
+          '<div class="mb-3"><label for="sex" class="form-label">Sex</label>' +
+          // '<input class="form-control" id="sex" placeholder="Sex"></div>' 
+          '<select class="form-control" id="sex">' +
+          SEX +
+          '</select></div>'
+        ,
 
         focusConfirm: false,
         preConfirm: () => {
@@ -478,7 +638,7 @@ function studentUpdate() {
   const Avg = document.getElementById('Avg').value;
   const TOD = document.getElementById('TOD').value;
   const age_group = document.getElementById('age_group').value;
-  const sex = document.getElementById('sex').value; 
+  const sex = document.getElementById('sex').value;
 
   console.log(JSON.stringify({
     "_id": id,
