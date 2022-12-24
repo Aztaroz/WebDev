@@ -20,7 +20,8 @@ app.listen(port, () => {
 app.get('/sleepdata', async (req, res) =>{
     const client = new MongoClient(uri);
     await client.connect();
-    const objects = await client.db('proj-db').collection('SleepData').find({}).toArray();
+    const objects = await client.db('proj-db').collection('SleepData').find({"Age Group":{"$not":{"$eq":"15 years and over"}}}).project({"Activity":0,"Period":0}).toArray();
+
     await client.close();
     res.status(200).send(objects);
 })
@@ -33,6 +34,7 @@ app.post('/sleepdata/create', async (req,res) => {
     await client.db('proj-db').collection('SleepData').insertOne({
         "Year": objects['Year'],
         "Avg hrs per day sleeping": objects['Avg hrs per day sleeping'],
+        "Standard Error": objects['Standard Error'],
         "Type of Days": objects['Type of Days'],
         "Age Group": objects ['Age Group'],
         "Sex": objects['Sex']
@@ -58,6 +60,7 @@ app.put('/sleepdata/update', async (req, res) => {
                 "Year": objects['Year'],
                 "Period": objects['Period'],
                 "Avg hrs per day sleeping": objects['Avg hrs per day sleeping'],
+                "Standard Error": objects['Standard Error'],
                 "Type of Days": objects['Type of Days'],
                 "Age Group": objects ['Age Group'],
                 "Sex": objects['Sex']
@@ -92,7 +95,7 @@ app.get('/sleepdata/search/:searchText', async (req, res) =>{
     await client.connect();
     // const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).sort({"Date received":-1}).limit(5).toArray();
 
-    const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).toArray();
+    const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText},$and:{"$not":{"$eq":"15 years and over"}}}).toArray();
 
     // const objects = await client.db('proj-db').collection('_id').aggregate([
     //     {

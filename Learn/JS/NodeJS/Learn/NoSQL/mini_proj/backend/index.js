@@ -7,22 +7,25 @@ function loadTable() {
       var trHTML = '';
       var num = 1;
       for (let object of objects) {
-        trHTML += "<tr>";
-        trHTML += "<td>" + num + "</td>";
-        trHTML += "<td>" + object["Year"] + "</td>";
-        trHTML += "<td>" + object["Avg hrs per day sleeping"] + "</td>";
-        trHTML += "<td>" + object["Type of Days"] + "</td>";
-        trHTML += "<td>" + object["Age Group"] + "</td>";
-        trHTML += "<td>" + object["Sex"] + "</td>";
-        // trHTML += "<td>" + object[""] + "</td>";
-        // trHTML += "<td>" + object[""] + "</td>";
-        // trHTML += "<td>" + object[""] + "</td>";
-        trHTML += "<td>";
-        trHTML += '<a type="button" class="btn btn-outline-secondary" onclick="showStudentUpdateBox(\'' + object["_id"] + '\')"><i class="fas fa-edit"></i></a>';
-        trHTML += '<a type="button" class="btn btn-outline-danger" onclick="studentDelete(\'' + object["_id"] + '\')"><i class="fas fa-trash"></i></a>';
-        trHTML += "<tr>";
+        var se = parseFloat(object["Standard Error"]).toFixed(2)
+        
+          trHTML += "<tr>";
+          trHTML += "<td>" + num + "</td>";
+          trHTML += "<td>" + object["Year"] + "</td>";
+          trHTML += "<td>" + object["Avg hrs per day sleeping"] + "</td>";
+          trHTML += "<td>" + se + "</td>";
+          trHTML += "<td>" + object["Type of Days"] + "</td>";
+          trHTML += "<td>" + object["Age Group"] + "</td>";
+          trHTML += "<td>" + object["Sex"] + "</td>";
+          // trHTML += "<td>" + object[""] + "</td>";
+          // trHTML += "<td>" + object[""] + "</td>";
+          // trHTML += "<td>" + object[""] + "</td>";
+          trHTML += "<td>";
+          trHTML += '<a type="button" class="btn btn-outline-secondary" onclick="showUpdateBox(\'' + object["_id"] + '\')"><i class="fas fa-edit"></i></a>';
+          trHTML += '<a type="button" class="btn btn-outline-danger" onclick="studentDelete(\'' + object["_id"] + '\')"><i class="fas fa-trash"></i></a>';
+          trHTML += "<tr>";
 
-        num++;
+          num++;
       }
 
       document.getElementById("mytable").innerHTML = trHTML;
@@ -70,6 +73,7 @@ function loadTable() {
 
 //done
 function loadQueryTable() {
+  console.log("start loaded query");
   document.getElementById("mytable").innerHTML = "<tr><th scope=\"row\" colspan=\"5\">Loading...</th></tr>";
   const searchText = document.getElementById('searchTextBox').value;
 
@@ -83,10 +87,12 @@ function loadQueryTable() {
       var num = 1;
       const objects = JSON.parse(this.responseText).Complaint;
       for (let object of objects) {
+        var se = parseFloat(object["Standard Error"]).toFixed(2)
         trHTML += "<tr>";
         trHTML += "<td>" + num + "</td>";
         trHTML += "<td>" + object["Year"] + "</td>";
         trHTML += "<td>" + object["Avg hrs per day sleeping"] + "</td>";
+        trHTML += "<td>" + se + "</td>";
         trHTML += "<td>" + object["Type of Days"] + "</td>";
         trHTML += "<td>" + object["Age Group"] + "</td>";
         trHTML += "<td>" + object["Sex"] + "</td>";
@@ -94,8 +100,8 @@ function loadQueryTable() {
         // trHTML += "<td>" + object["GPA"] + "</td>";
         // trHTML += "<td>" + object["Salary"] + "</td>";
         trHTML += "<td>";
-        trHTML += '<a type="button" class="btn btn-outline-secondary" onclick="showStudentUpdateBox(\'' + object["_id"] + '\')"><i class="fas fa-edit"></i></a>';
-        trHTML += '<a type="button" class="btn btn-outline-danger" onclick="studentDelete(\'' + object['_id'] + '\')"><i class="fas fa-trash"></i></a></td>';
+        trHTML += '<a type="button" class="btn btn-outline-secondary" onclick="showUpdateBox(\'' + object["_id"] + '\')"><i class="fas fa-edit"></i></a>';
+        trHTML += '<a type="button" class="btn btn-outline-danger" onclick="DeleteTransaction(\'' + object['_id'] + '\')"><i class="fas fa-trash"></i></a></td>';
         trHTML += "<tr>";
         num++;
 
@@ -214,7 +220,7 @@ function loadQueryTable() {
 //     if (this.readyState == 4 && this.status == 200) {
 //       const objects = JSON.parse(this.responseText);
 
-      
+
 //         var data = google.visualization.arrayToDataTable([
 //           ['Year', 'Sales', 'Expenses'],
 //           ['2004', 1000, 400],
@@ -239,7 +245,7 @@ function loadQueryTable() {
 //   }
 // }
 
-function showStudentCreateBox() {
+function showCreateBox() {
   var d = new Date();
   const date = d.toISOString().split('T')[0];
   Swal.fire({
@@ -252,6 +258,9 @@ function showStudentCreateBox() {
 
       '<div class="mb-3"><label for="Avg" class="form-label">Average Sleeping Hours / Day</label>' +
       '<input class="form-control" id="Avg" placeholder="Hours (eg.8)"></div>' +
+
+      '<div class="mb-3"><label for="SE" class="form-label">Standard Error</label>' +
+      '<input class="form-control" id="SE" placeholder="Standard Error"></div>' +
 
       '<div class="mb-3"><label for="TOD" class="form-label">Type of Day</label>' +
       // '<input class="form-control" id="TOD" placeholder="Name"></div>' +
@@ -286,17 +295,18 @@ function showStudentCreateBox() {
 
     focusConfirm: false,
     preConfirm: () => {
-      slistCreate();
+      CreateTransaction();
     }
   });
 }
 
-function slistCreate() {
+function CreateTransaction() {
 
   // const Created_Date = document.getElementById('Created_Date').value;
   const Year = document.getElementById('Year').value;
   const Avg = document.getElementById('Avg').value;
   const TOD = document.getElementById('TOD').value;
+  const SE = document.getElementById('SE').value;
   const age_group = document.getElementById('age_group').value;
   const sex = document.getElementById('sex').value;
   // const Project = document.getElementById('Project').value;
@@ -317,6 +327,7 @@ function slistCreate() {
     // Salary: Salary,
     "Year": Year,
     "Avg hrs per day sleeping": Avg,
+    "Standard Error": SE,
     "Type of Days": TOD,
     "Age Group": age_group,
     "Sex": sex
@@ -340,6 +351,7 @@ function slistCreate() {
     // Salary: Salary,
     "Year": Year,
     "Avg hrs per day sleeping": Avg,
+    "Standard Error": SE,
     "Type of Days": TOD,
     "Age Group": age_group,
     "Sex": sex
@@ -351,7 +363,7 @@ function slistCreate() {
       const objects = JSON.parse(this.responseText);
       Swal.fire(
         'Good job!',
-        'Create Student Information Successfully!',
+        'Create Sleep Data Successfully!',
         'success'
       );
       loadTable();
@@ -359,7 +371,7 @@ function slistCreate() {
   };
 }
 
-function studentDelete(id) {
+function DeleteTransaction(id) {
   console.log("Delete: ", id);
   const xhttp = new XMLHttpRequest();
   xhttp.open("DELETE", "http://localhost:4596/sleepdata/delete");
@@ -372,7 +384,7 @@ function studentDelete(id) {
       const objects = JSON.parse(this.responseText);
       Swal.fire(
         'Good job!',
-        'Delete Student Information Successfully!',
+        'Delete Sleep Data Successfully!',
         'success'
       );
       loadTable();
@@ -381,7 +393,7 @@ function studentDelete(id) {
 }
 
 
-function showStudentUpdateBox(id) {
+function showUpdateBox(id) {
   console.log("edit", id);
   const xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:4596/sleepdata/" + id);
@@ -389,7 +401,7 @@ function showStudentUpdateBox(id) {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       const object = JSON.parse(this.responseText).Complaint;
-      console.log("showStudentUpdateBox", object);
+      console.log("showUpdateBox", object);
 
       switch (object['Type of Days']) {
         case "All days":
@@ -530,7 +542,7 @@ function showStudentUpdateBox(id) {
 
 
       Swal.fire({
-        title: 'Update Student Transaction',
+        title: 'Update Sleep Data Transaction',
         // html: '<input id="id" class="swal2-input" placeholder="OID" type="hidden" value="' + object['_id'] + '"><br>' +
 
         //   '<div class="mb-3"><label for="Created_Date" class="form-label">Created Date</label>' +
@@ -575,6 +587,9 @@ function showStudentUpdateBox(id) {
           '<input class="form-control" id="Avg" placeholder="Hours (eg.8)" value="' + object['Avg hrs per day sleeping'] + '"></div>' +
 
 
+          '<div class="mb-3"><label for="SE" class="form-label">Standard Error</label>' +
+          '<input class="form-control" id="SE" placeholder="Standard Error" value="'+object["Standard Error"]+'"></div>' +
+
           '<div class="mb-3"><label for="TOD" class="form-label">Type of Day</label>' +
 
           // '<input class="form-control" id="TOD" placeholder="Name"></div>' +
@@ -611,7 +626,7 @@ function showStudentUpdateBox(id) {
 
         focusConfirm: false,
         preConfirm: () => {
-          studentUpdate();
+          UpdateTransaction();
         }
       });
     }
@@ -619,7 +634,7 @@ function showStudentUpdateBox(id) {
 }
 
 
-function studentUpdate() {
+function UpdateTransaction() {
 
   // const id = document.getElementById("id").value;
   // const Created_Date = document.getElementById('Created_Date').value;
@@ -636,6 +651,7 @@ function studentUpdate() {
   const id = document.getElementById("id").value;
   const Year = document.getElementById('Year').value;
   const Avg = document.getElementById('Avg').value;
+  const SE = document.getElementById('SE').value;
   const TOD = document.getElementById('TOD').value;
   const age_group = document.getElementById('age_group').value;
   const sex = document.getElementById('sex').value;
@@ -654,6 +670,7 @@ function studentUpdate() {
     // Salary: Salary,
     "Year": Year,
     "Avg hrs per day sleeping": Avg,
+    "Standard Error": SE,
     "Type of Days": TOD,
     "Age Group": age_group,
     "Sex": sex
@@ -677,6 +694,7 @@ function studentUpdate() {
     // Salary: Salary,
     "Year": Year,
     "Avg hrs per day sleeping": Avg,
+    "Standard Error": SE,
     "Type of Days": TOD,
     "Age Group": age_group,
     "Sex": sex
@@ -689,7 +707,7 @@ function studentUpdate() {
       const objects = JSON.parse(this.responseText);
       Swal.fire(
         'Good job!',
-        'Update Student Information Successfully!',
+        'Update Sleep Data Successfully!',
         'success'
       );
       loadTable();
