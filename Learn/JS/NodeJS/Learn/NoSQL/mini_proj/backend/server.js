@@ -95,7 +95,11 @@ app.get('/sleepdata/search/:searchText', async (req, res) =>{
     await client.connect();
     // const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText}}).sort({"Date received":-1}).limit(5).toArray();
 
-    const objects = await client.db('proj-db').collection('SleepData').find({ $text: {$search: searchText},$and:{"$not":{"$eq":"15 years and over"}}}).toArray();
+    // const objects = await client.db('proj-db').collection('SleepData').find({$text: {$search: searchText}}).toArray();
+
+    const objects = await client.db('proj-db').collection('SleepData').find({$and:[{$text: {$search: searchText}},{"Age Group":{"$not":{"$eq":"15 years and over"}}}]}).toArray();
+
+
 
     // const objects = await client.db('proj-db').collection('_id').aggregate([
     //     {
