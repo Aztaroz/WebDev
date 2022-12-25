@@ -73,7 +73,7 @@ function loadTable() {
 
 //done
 function loadQueryTable() {
-  console.log("start loaded query");
+  
   document.getElementById("mytable").innerHTML = "<tr><th scope=\"row\" colspan=\"5\">Loading...</th></tr>";
   const searchText = document.getElementById('searchTextBox').value;
 
@@ -106,12 +106,14 @@ function loadQueryTable() {
         num++;
 
       }
-      console.log(trHTML);
+
       document.getElementById("mytable").innerHTML = trHTML;
 
     }
   };
+  console.log("finish loaded query");
 }
+
 
 //Do it later
 // function loadGraph() {
