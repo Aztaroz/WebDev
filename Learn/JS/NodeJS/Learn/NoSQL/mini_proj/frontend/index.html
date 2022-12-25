@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | American Sleep Data</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,81 +14,56 @@
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
         crossorigin="anonymous" />
 
-    <title>Student Collection</title>
+
     <link href="index.css" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </head>
 
-<body onload="loadTable()">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg bg-dark">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item" style="margin: 0px 20px 0px 20px;">
-                            <a class="nav-link active" aria-current="page" href="#">Data</a>
-                        </li>
-                        <li class="nav-item" style="margin: 0px 20px 0px 20px;">
-                            <a class="nav-link" href="#">Dashboard</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchTextBox">
-                        <button class="btn btn-outline-success" type="submit" onclick="loadQueryTable()" >Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+<body onload="loadSort()">
 
-
-
-        <!-- <div class="d-flex bd-highlight mb-3">
-
-        <div class="col">
-            <div id="piechartTimelyResponse"></div>
-        </div>
-
-        <div class="col">
-            <div id="barchartSubmitted"></div>
-        </div>
-       
-        </div> -->
-        <div class="d-flex bd-highlight mb-3">
-            <div class="me-auto p-2 bd-highlight">
-                <h2>Americans Sleep Data
-            </div>
-            <div class="p-2 bd-highlight">
-                <button type="button" class="btn btn-secondary" onclick="showCreateBox()">Create</button>
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" style="margin: 0px 20px 0px 20px;">
+                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item" style="margin: 0px 20px 0px 20px;">
+                        <a class="nav-link" href="data.html">Data</a>
+                    </li>
+                </ul>
+                
             </div>
         </div>
-        <div class="table-responsive">
-            <table class="table table-condensed table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Year</th>
-                        <th scope="col">Average Hours/Day</th>
-                        <th scope="col">Standard Error</th>
-                        <th scope="col">Type of Days</th>
-                        <th scope="col">Age Group</th>
-                        <th scope="col">Sex</th>
-                    </tr>
-                </thead>
-                <tbody id="mytable">
-                    <tr>
-                        <th scope="row" colspan="5">Loading...</th>
-                    </tr>
-                </tbody>
-            </table>
+    </nav>
+
+    <script src="../backend/chart.js">
+    </script>
+    <div class=" align-items-center justify-content-center">
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Select : </label>
+            <select class="form-select" id="inputYear">
+            </select>
+            <select class="form-select" id="inputTOD">
+
+            </select>
+            <!-- <select class="form-select" id="inputAG">
+
+            </select> -->
+            <select class="form-select" id="inputSex">
+                <option selected>All</option>
+            </select>
+            <button onclick="drawChart()">OK</button>
         </div>
+
+        
+        <div id="barchart_values" class="container"></div>
+        </div>
+
     </div>
+    <!-- <div id="columnchart_material" style="height: 500px;"></div> -->
 
-    <script src="../backend/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-        crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </body>
 
 </html>
