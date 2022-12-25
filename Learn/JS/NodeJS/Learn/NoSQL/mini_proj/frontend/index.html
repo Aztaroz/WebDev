@@ -14,13 +14,14 @@
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
         crossorigin="anonymous" />
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+    
     <link href="index.css" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 
-<body onload="loadSort()">
+<body>
 
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
@@ -33,7 +34,7 @@
                         <a class="nav-link" href="data.html">Data</a>
                     </li>
                 </ul>
-                
+
             </div>
         </div>
     </nav>
@@ -42,24 +43,26 @@
     </script>
     <div class=" align-items-center justify-content-center">
         <div class="input-group mb-3">
+            
             <label class="input-group-text" for="inputGroupSelect01">Select : </label>
-            <select class="form-select" id="inputYear">
+            <select class="form-select" id="inputYear" required>
             </select>
-            <select class="form-select" id="inputTOD">
+            <select class="form-select" id="inputTOD" required>
 
             </select>
             <!-- <select class="form-select" id="inputAG">
 
             </select> -->
-            <select class="form-select" id="inputSex">
+            <select class="form-select" id="inputSex" required>
                 <option selected>All</option>
             </select>
             <button onclick="drawChart()">OK</button>
         </div>
 
-        
         <div id="barchart_values" class="container"></div>
-        </div>
+        <div id="barchart_alltime_values" class="container"></div>
+
+    </div>
 
     </div>
     <!-- <div id="columnchart_material" style="height: 500px;"></div> -->
