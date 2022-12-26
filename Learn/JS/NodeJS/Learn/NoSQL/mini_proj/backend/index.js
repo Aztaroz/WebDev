@@ -1,3 +1,4 @@
+
 //done
 function loadTable() {
   $.ajax({
@@ -8,24 +9,23 @@ function loadTable() {
       var num = 1;
       for (let object of objects) {
         var se = parseFloat(object["Standard Error"]).toFixed(2)
-        
-          trHTML += "<tr>";
-          trHTML += "<td>" + num + "</td>";
-          trHTML += "<td>" + object["Year"] + "</td>";
-          trHTML += "<td>" + object["Avg hrs per day sleeping"] + "</td>";
-          trHTML += "<td>" + se + "</td>";
-          trHTML += "<td>" + object["Type of Days"] + "</td>";
-          trHTML += "<td>" + object["Age Group"] + "</td>";
-          trHTML += "<td>" + object["Sex"] + "</td>";
-          // trHTML += "<td>" + object[""] + "</td>";
-          // trHTML += "<td>" + object[""] + "</td>";
-          // trHTML += "<td>" + object[""] + "</td>";
-          trHTML += "<td>";
-          trHTML += '<a type="button" class="btn btn-outline-secondary" onclick="showUpdateBox(\'' + object["_id"] + '\')"><i class="fas fa-edit"></i></a>';
-          trHTML += '<a type="button" class="btn btn-outline-danger" onclick="studentDelete(\'' + object["_id"] + '\')"><i class="fas fa-trash"></i></a>';
-          trHTML += "<tr>";
+        trHTML += "<tr>";
+        trHTML += "<td>" + num + "</td>";
+        trHTML += "<td>" + object["Year"] + "</td>";
+        trHTML += "<td>" + object["Avg hrs per day sleeping"] + "</td>";
+        trHTML += "<td>" + se + "</td>";
+        trHTML += "<td>" + object["Type of Days"] + "</td>";
+        trHTML += "<td>" + object["Age Group"] + "</td>";
+        trHTML += "<td>" + object["Sex"] + "</td>";
+        // trHTML += "<td>" + object[""] + "</td>";
+        // trHTML += "<td>" + object[""] + "</td>";
+        // trHTML += "<td>" + object[""] + "</td>";
+        trHTML += "<td>";
+        trHTML += '<a type="button" class="btn btn-outline-secondary" onclick="showUpdateBox(\'' + object["_id"] + '\')"><i class="fas fa-edit"></i></a>';
+        trHTML += '<a type="button" class="btn btn-outline-danger" onclick="studentDelete(\'' + object["_id"] + '\')"><i class="fas fa-trash"></i></a>';
+        trHTML += "<tr>";
 
-          num++;
+        num++;
       }
 
       document.getElementById("mytable").innerHTML = trHTML;
@@ -73,47 +73,56 @@ function loadTable() {
 
 //done
 function loadQueryTable() {
-  
+
   document.getElementById("mytable").innerHTML = "<tr><th scope=\"row\" colspan=\"5\">Loading...</th></tr>";
   const searchText = document.getElementById('searchTextBox').value;
 
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:4596/sleepdata/search/" + searchText);
+  if (searchText == '') {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: "Seacrh Text Can't be Null",
+    })
+    loadTable()
+  }
+  else {
+    console.log("else");
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:4596/sleepdata/search/" + searchText);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        var trHTML = '';
+        var num = 1;
+        const objects = JSON.parse(this.responseText).Complaint;
+        for (let object of objects) {
+          var se = parseFloat(object["Standard Error"]).toFixed(2)
+          trHTML += "<tr>";
+          trHTML += "<td>" + num + "</td>";
+          trHTML += "<td>" + object["Year"] + "</td>";
+          trHTML += "<td>" + object["Avg hrs per day sleeping"] + "</td>";
+          trHTML += "<td>" + se + "</td>";
+          trHTML += "<td>" + object["Type of Days"] + "</td>";
+          trHTML += "<td>" + object["Age Group"] + "</td>";
+          trHTML += "<td>" + object["Sex"] + "</td>";
+          // trHTML += "<td>" + object["Savings"] + "</td>";
+          // trHTML += "<td>" + object["GPA"] + "</td>";
+          // trHTML += "<td>" + object["Salary"] + "</td>";
+          trHTML += "<td>";
+          trHTML += '<a type="button" class="btn btn-outline-secondary" onclick="showUpdateBox(\'' + object["_id"] + '\')"><i class="fas fa-edit"></i></a>';
+          trHTML += '<a type="button" class="btn btn-outline-danger" onclick="DeleteTransaction(\'' + object['_id'] + '\')"><i class="fas fa-trash"></i></a></td>';
+          trHTML += "<tr>";
+          num++;
 
-  xhttp.send();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      var trHTML = '';
-      var num = 1;
-      const objects = JSON.parse(this.responseText).Complaint;
-      for (let object of objects) {
-        var se = parseFloat(object["Standard Error"]).toFixed(2)
-        trHTML += "<tr>";
-        trHTML += "<td>" + num + "</td>";
-        trHTML += "<td>" + object["Year"] + "</td>";
-        trHTML += "<td>" + object["Avg hrs per day sleeping"] + "</td>";
-        trHTML += "<td>" + se + "</td>";
-        trHTML += "<td>" + object["Type of Days"] + "</td>";
-        trHTML += "<td>" + object["Age Group"] + "</td>";
-        trHTML += "<td>" + object["Sex"] + "</td>";
-        // trHTML += "<td>" + object["Savings"] + "</td>";
-        // trHTML += "<td>" + object["GPA"] + "</td>";
-        // trHTML += "<td>" + object["Salary"] + "</td>";
-        trHTML += "<td>";
-        trHTML += '<a type="button" class="btn btn-outline-secondary" onclick="showUpdateBox(\'' + object["_id"] + '\')"><i class="fas fa-edit"></i></a>';
-        trHTML += '<a type="button" class="btn btn-outline-danger" onclick="DeleteTransaction(\'' + object['_id'] + '\')"><i class="fas fa-trash"></i></a></td>';
-        trHTML += "<tr>";
-        num++;
+        }
+
+        document.getElementById("mytable").innerHTML = trHTML;
 
       }
+    };
+  }
 
-      document.getElementById("mytable").innerHTML = trHTML;
-
-    }
-  };
-  console.log("finish loaded query");
 }
-
 
 //Do it later
 // function loadGraph() {
@@ -277,11 +286,12 @@ function showCreateBox() {
       // '<input class="form-control" id="age_group" placeholder="Surname"></div>' 
       `<select class="form-control" id="age_group">
         <option value="" disabled selected>Please Select...</option>
-        <option value="15 years and over">	15 years and over</option>
         <option value="15 to 24 years">15 to 24 years</option>
         <option value="25 to 34 years">25 to 34 years</option>
         <option value="35 to 44 years">35 to 44 years</option>
         <option value="45 to 54 years">45 to 54 years</option>
+        <option value="55 to 64 years">55 to 64 years</option>
+        <option value="65 years and over">65 years and over</option>
       </select></div>`
       +
 
@@ -336,41 +346,50 @@ function CreateTransaction() {
 
   }));
 
-  //pass
-  const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "http://localhost:4596/sleepdata/create");
-  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xhttp.send(JSON.stringify({
-    // Created_Date: Created_Date,
-    // StudentID: StudentID,
-    // Title: Title,
-    // Name: Name,
-    // Surname: Surname,
-    // Field: Field,
-    // Project: Project,
-    // Savings: Savings,
-    // GPA: GPA,
-    // Salary: Salary,
-    "Year": Year,
-    "Avg hrs per day sleeping": Avg,
-    "Standard Error": SE,
-    "Type of Days": TOD,
-    "Age Group": age_group,
-    "Sex": sex
 
-  }));
+  if (Year == '' || Avg == '') {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please fill out all fields',
+    })
+  } else {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:4596/sleepdata/create");
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(JSON.stringify({
+      // Created_Date: Created_Date,
+      // StudentID: StudentID,
+      // Title: Title,
+      // Name: Name,
+      // Surname: Surname,
+      // Field: Field,
+      // Project: Project,
+      // Savings: Savings,
+      // GPA: GPA,
+      // Salary: Salary,
+      "Year": Year,
+      "Avg hrs per day sleeping": Avg,
+      "Standard Error": SE,
+      "Type of Days": TOD,
+      "Age Group": age_group,
+      "Sex": sex
 
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      const objects = JSON.parse(this.responseText);
-      Swal.fire(
-        'Good job!',
-        'Create Sleep Data Successfully!',
-        'success'
-      );
-      loadTable();
-    }
-  };
+    }));
+
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        const objects = JSON.parse(this.responseText);
+        Swal.fire(
+          'Good job!',
+          'Create Sleep Data Successfully!',
+          'success'
+        );
+        loadTable();
+      }
+    };
+  }
+
 }
 
 function DeleteTransaction(id) {
@@ -432,7 +451,6 @@ function showUpdateBox(id) {
       switch (object['Age Group']) {
         case "15 years and over":
           AOG = `<option value="" disabled>Please Select...</option>
-                <option value="15 years and over" selected>	15 years and over</option>
                 <option value="15 to 24 years">15 to 24 years</option>
                 <option value="25 to 34 years">25 to 34 years</option>
                 <option value="35 to 44 years">35 to 44 years</option>
@@ -444,7 +462,6 @@ function showUpdateBox(id) {
 
         case "15 to 24 years":
           AOG = `<option value="" disabled>Please Select...</option>
-                <option value="15 years and over">15 years and over</option>
                 <option value="15 to 24 years" selected>15 to 24 years</option>
                 <option value="25 to 34 years">25 to 34 years</option>
                 <option value="35 to 44 years">35 to 44 years</option>
@@ -456,7 +473,6 @@ function showUpdateBox(id) {
 
         case "25 to 34 years":
           AOG = `<option value="" disabled>Please Select...</option>
-                  <option value="15 years and over">15 years and over</option>
                   <option value="15 to 24 years">15 to 24 years</option>
                   <option value="25 to 34 years" selected>25 to 34 years</option>
                   <option value="35 to 44 years">35 to 44 years</option>
@@ -468,7 +484,6 @@ function showUpdateBox(id) {
 
         case "35 to 44 years":
           AOG = `<option value="" disabled>Please Select...</option>
-                  <option value="15 years and over">15 years and over</option>
                   <option value="15 to 24 years">15 to 24 years</option>
                   <option value="25 to 34 years">25 to 34 years</option>
                   <option value="35 to 44 years" selected>35 to 44 years</option>
@@ -480,7 +495,6 @@ function showUpdateBox(id) {
 
         case "45 to 54 years":
           AOG = `<option value="" disabled>Please Select...</option>
-                  <option value="15 years and over">15 years and over</option>
                   <option value="15 to 24 years">15 to 24 years</option>
                   <option value="25 to 34 years">25 to 34 years</option>
                   <option value="35 to 44 years">35 to 44 years</option>
@@ -492,7 +506,6 @@ function showUpdateBox(id) {
 
         case "55 to 64 years":
           AOG = `<option value="" disabled>Please Select...</option>
-                  <option value="15 years and over">15 years and over</option>
                   <option value="15 to 24 years">15 to 24 years</option>
                   <option value="25 to 34 years">25 to 34 years</option>
                   <option value="35 to 44 years">35 to 44 years</option>
@@ -504,7 +517,6 @@ function showUpdateBox(id) {
 
         case "65 years and over":
           AOG = `<option value="" disabled>Please Select...</option>
-                  <option value="15 years and over">15 years and over</option>
                   <option value="15 to 24 years">15 to 24 years</option>
                   <option value="25 to 34 years">25 to 34 years</option>
                   <option value="35 to 44 years">35 to 44 years</option>
@@ -590,7 +602,7 @@ function showUpdateBox(id) {
 
 
           '<div class="mb-3"><label for="SE" class="form-label">Standard Error</label>' +
-          '<input class="form-control" id="SE" placeholder="Standard Error" value="'+object["Standard Error"]+'"></div>' +
+          '<input class="form-control" id="SE" placeholder="Standard Error" value="' + object["Standard Error"] + '"></div>' +
 
           '<div class="mb-3"><label for="TOD" class="form-label">Type of Day</label>' +
 

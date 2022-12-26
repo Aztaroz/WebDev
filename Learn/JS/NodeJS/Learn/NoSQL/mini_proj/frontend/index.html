@@ -23,18 +23,20 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-dark">
+    <nav class="navbar navbar-expand-lg " style="background: #6002A3;
+    background: -moz-linear-gradient(left, #6002A3 0%, #411270 40%, #240147 100%);
+    background: -webkit-linear-gradient(left, #6002A3 0%, #411270 40%, #240147 100%);
+    background: linear-gradient(to right, #6002A3 0%, #411270 40%, #240147 100%);">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item" style="margin: 0px 20px 0px 20px;">
-                        <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                        <a class="nav-link active" aria-current="page" href="#" style="color: white;">Dashboard</a>
                     </li>
                     <li class="nav-item" style="margin: 0px 20px 0px 20px;">
-                        <a class="nav-link" href="data.html">Data</a>
+                        <a class="nav-link" href="data.html" style="color: #deb1fe;">Data</a>
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -56,7 +58,7 @@
             <select class="form-select" id="inputSex" required>
                 <option selected>All</option>
             </select>
-            <button onclick="drawChart()">OK</button>
+            <button onclick="drawChart()" class="btn-primary" style="width: 100px;">OK</button>
         </div>
 
         <div id="barchart_values" class="container"></div>

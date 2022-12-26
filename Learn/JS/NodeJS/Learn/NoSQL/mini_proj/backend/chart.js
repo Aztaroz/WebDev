@@ -125,12 +125,20 @@ function loadSort() {
                     }
                 }
             }
+
             var avgA = sumA / countA
             var avgB = sumB / countB
             var avgC = sumC / countC
             var avgD = sumD / countD
             var avgE = sumE / countE
             var avgF = sumF / countF
+
+            avgA = parseFloat(avgA.toFixed(2))
+            avgB = parseFloat(avgB.toFixed(2))
+            avgC = parseFloat(avgC.toFixed(2))
+            avgD = parseFloat(avgD.toFixed(2))
+            avgE = parseFloat(avgE.toFixed(2))
+            avgF = parseFloat(avgF.toFixed(2))
 
             var data = google.visualization.arrayToDataTable([
                 ["Year", "Average hours per day sleeping", { role: "style" }],
@@ -153,7 +161,7 @@ function loadSort() {
                 2]);
 
             var options = {
-                title: `Sleep Data in year : All Time`,
+                title: `Sleep Data by age group in year : All Time`,
                 width: 1300,
                 height: 660,
                 bar: { groupWidth: "95%" },
