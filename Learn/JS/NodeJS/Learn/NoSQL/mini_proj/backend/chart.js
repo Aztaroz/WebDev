@@ -8,7 +8,7 @@ function loadSort() {
     // var All = '<option selected>All</option>'
     var Year_option = ''
     var TOD_option = ''
-    var AG_option = ''
+    // var AG_option = ''
     var Sex_option = ''
 
     var year = []
@@ -22,6 +22,13 @@ function loadSort() {
     var sumD = 0
     var sumE = 0
     var sumF = 0
+
+    var sumASE = 0
+    var sumBSE = 0
+    var sumCSE = 0
+    var sumDSE = 0
+    var sumESE = 0
+    var sumFSE = 0
 
     var countA = 0
     var countB = 0
@@ -88,31 +95,50 @@ function loadSort() {
                                 switch (object['Age Group']) {
                                     case "15 to 24 years":
                                         var a = parseFloat(object['Avg hrs per day sleeping'])
+                                        var ase = parseFloat(object['Standard Error'])
+
+                                        sumASE = sumASE + ase
                                         sumA = sumA + a
                                         countA += 1
+                                        
                                         break;
                                     case "25 to 34 years":
                                         var b = parseFloat(object['Avg hrs per day sleeping'])
+                                        var bse = parseFloat(object['Standard Error'])
+
+                                        sumBSE = sumBSE + bse
                                         sumB = sumB + b
                                         countB += 1
                                         break;
                                     case "35 to 44 years":
                                         var c = parseFloat(object['Avg hrs per day sleeping'])
+                                        var cse = parseFloat(object['Standard Error'])
+
+                                        sumCSE = sumCSE + cse
                                         sumC = sumC + c
                                         countC += 1
                                         break;
                                     case "45 to 54 years":
                                         var d = parseFloat(object['Avg hrs per day sleeping'])
+                                        var dse = parseFloat(object['Standard Error'])
+
+                                        sumDSE = sumDSE + dse
                                         sumD = sumD + d
                                         countD += 1
                                         break;
                                     case "55 to 64 years":
                                         var e = parseFloat(object['Avg hrs per day sleeping'])
+                                        var ese = parseFloat(object['Standard Error'])
+
+                                        sumESE = sumESE + ese
                                         sumE = sumE + e
                                         countE += 1
                                         break;
                                     case "65 years and over":
                                         var f = parseFloat(object['Avg hrs per day sleeping'])
+                                        var fse = parseFloat(object['Standard Error'])
+
+                                        sumFSE = sumFSE + fse
                                         sumF = sumF + f
                                         countF += 1
                                         break;
@@ -133,6 +159,13 @@ function loadSort() {
             var avgE = sumE / countE
             var avgF = sumF / countF
 
+            var avgASE = sumASE / countA
+            var avgBSE = sumBSE / countB
+            var avgCSE = sumCSE / countC
+            var avgDSE = sumDSE / countD
+            var avgESE = sumESE / countE
+            var avgFSE = sumFSE / countF
+
             avgA = parseFloat(avgA.toFixed(2))
             avgB = parseFloat(avgB.toFixed(2))
             avgC = parseFloat(avgC.toFixed(2))
@@ -142,12 +175,12 @@ function loadSort() {
 
             var data = google.visualization.arrayToDataTable([
                 ["Year", "Average hours per day sleeping", { role: "style" }],
-                ["15 to 24 years", avgA, "#9102F7"],
-                ["25 to 34 years", avgB, "#9C4EDC"],
-                ["35 to 44 years", avgC, "#7A2BBF"],
-                ["45 to 54 years", avgD, "color: #5A199B"],
-                ["55 to 64 years", avgE, "color: #3C0B6C"],
-                ["65 years and over", avgF, "color: #240147"]
+                [`15 to 24 years\nStandard Error : ${avgASE.toFixed(2)}`, avgA, "#9102F7"],
+                [`25 to 34 years\nStandard Error : ${avgBSE.toFixed(2)}`, avgB, "#9C4EDC"],
+                [`35 to 44 years\nStandard Error : ${avgCSE.toFixed(2)}`, avgC, "#7A2BBF"],
+                [`45 to 54 years\nStandard Error : ${avgDSE.toFixed(2)}`, avgD, "color: #5A199B"],
+                [`55 to 64 years\nStandard Error : ${avgESE.toFixed(2)}`, avgE, "color: #3C0B6C"],
+                [`65 years and over\nStandard Error : ${avgFSE.toFixed(2)}`, avgF, "color: #240147"]
             ]);
 
             var view = new google.visualization.DataView(data);
@@ -216,21 +249,27 @@ function drawChart() {
                                 switch (object['Age Group']) {
                                     case "15 to 24 years":
                                         var a = parseFloat(object['Avg hrs per day sleeping'])
+                                        var ase = parseFloat(object['Standard Error'])
                                         break;
                                     case "25 to 34 years":
                                         var b = parseFloat(object['Avg hrs per day sleeping'])
+                                        var bse = parseFloat(object['Standard Error'])
                                         break;
                                     case "35 to 44 years":
                                         var c = parseFloat(object['Avg hrs per day sleeping'])
+                                        var cse = parseFloat(object['Standard Error'])
                                         break;
                                     case "45 to 54 years":
                                         var d = parseFloat(object['Avg hrs per day sleeping'])
+                                        var dse = parseFloat(object['Standard Error'])
                                         break;
                                     case "55 to 64 years":
                                         var e = parseFloat(object['Avg hrs per day sleeping'])
+                                        var ese = parseFloat(object['Standard Error'])
                                         break;
                                     case "65 years and over":
                                         var f = parseFloat(object['Avg hrs per day sleeping'])
+                                        var fse = parseFloat(object['Standard Error'])
                                         break;
                                     default:
                                         console.log("Error");
@@ -242,12 +281,12 @@ function drawChart() {
                 }
                 var data = google.visualization.arrayToDataTable([
                     ["Year", "Average hours per day sleeping", { role: "style" }],
-                    ["15 to 24 years", a, "#9102F7"],
-                    ["25 to 34 years", b, "#9C4EDC"],
-                    ["35 to 44 years", c, "#7A2BBF"],
-                    ["45 to 54 years", d, "color: #5A199B"],
-                    ["55 to 64 years", e, "color: #3C0B6C"],
-                    ["65 years and over", f, "color: #240147"]
+                    [`15 to 24 years\nStandard Error : ${ase.toFixed(2)}`, a, "#9102F7"],
+                    [`25 to 34 years\nStandard Error : ${bse.toFixed(2)} `, b, "#9C4EDC"],
+                    [`35 to 44 years\nStandard Error : ${cse.toFixed(2)}`, c, "#7A2BBF"],
+                    [`45 to 54 years\nStandard Error : ${dse.toFixed(2)}`, d, "color: #5A199B"],
+                    [`55 to 64 years\nStandard Error : ${ese.toFixed(2)}`, e, "color: #3C0B6C"],
+                    [`65 years and over\nStandard Error : ${fse.toFixed(2)}`, f, "color: #240147"]
                 ]);
 
                 var view = new google.visualization.DataView(data);
@@ -266,6 +305,7 @@ function drawChart() {
                     height: 660,
                     bar: { groupWidth: "95%" },
                     legend: { position: "none" },
+
                 }
                 var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
                 chart.draw(view, options);
