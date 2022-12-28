@@ -65,6 +65,11 @@ function loadSort() {
             TOD_option += '<option selected disabled value="null">Please Select Type of Days</option>'
             Sex_option += '<option selected disabled value="null">Please Select Sex</option>'
 
+            year_Array.sort((x, y) => {
+                console.log(`Comparing ${x} and ${y}`);
+                return x - y
+            })
+
 
             for (var x of year_Array) {
                 Year_option += `<option  value='${x}'>` + x + "</option>";
@@ -100,7 +105,7 @@ function loadSort() {
                                         sumASE = sumASE + ase
                                         sumA = sumA + a
                                         countA += 1
-                                        
+
                                         break;
                                     case "25 to 34 years":
                                         var b = parseFloat(object['Avg hrs per day sleeping'])
@@ -199,6 +204,9 @@ function loadSort() {
                 height: 660,
                 bar: { groupWidth: "95%" },
                 legend: { position: "none" },
+                vAxis:{
+                    title:"Age Group"
+                }
             }
             var chart = new google.visualization.BarChart(document.getElementById("barchart_alltime_values"));
             chart.draw(view, options);
@@ -252,6 +260,7 @@ function drawChart() {
                                         var ase = parseFloat(object['Standard Error'])
                                         break;
                                     case "25 to 34 years":
+                                        
                                         var b = parseFloat(object['Avg hrs per day sleeping'])
                                         var bse = parseFloat(object['Standard Error'])
                                         break;
@@ -275,18 +284,69 @@ function drawChart() {
                                         console.log("Error");
                                         break;
                                 }
+                                
                             }
                         }
                     }
                 }
+
+                // ตรวจสอบหาก Query Chart ออกมาแล้ว undefined
+                if (ase == undefined) {
+                    ase = 0
+                    console.log("undefined");
+                }
+                else {
+                    ase = ase.toFixed(2)
+                }
+
+                if (bse == undefined) {
+                    bse = 0
+                    console.log("undefined");
+                }
+                else {
+                    bse = bse.toFixed(2)
+                }
+
+                if (cse == undefined) {
+                    cse = 0
+                    console.log("undefined");
+                }
+                else {
+                    cse = cse.toFixed(2)
+                }
+
+                if (dse == undefined) {
+                    dse = 0
+                    console.log("undefined");
+                }
+                else {
+                    dse = dse.toFixed(2)
+                }
+
+                if (ese == undefined) {
+                    ese = 0
+                    console.log("undefined");
+                }
+                else {
+                    ese = ese.toFixed(2)
+                }
+                
+                if (fse == undefined) {
+                    fse = 0
+                    console.log("undefined");
+                }
+                else {
+                    fse = fse.toFixed(2)
+                }
+
                 var data = google.visualization.arrayToDataTable([
                     ["Year", "Average hours per day sleeping", { role: "style" }],
-                    [`15 to 24 years\nStandard Error : ${ase.toFixed(2)}`, a, "#9102F7"],
-                    [`25 to 34 years\nStandard Error : ${bse.toFixed(2)} `, b, "#9C4EDC"],
-                    [`35 to 44 years\nStandard Error : ${cse.toFixed(2)}`, c, "#7A2BBF"],
-                    [`45 to 54 years\nStandard Error : ${dse.toFixed(2)}`, d, "color: #5A199B"],
-                    [`55 to 64 years\nStandard Error : ${ese.toFixed(2)}`, e, "color: #3C0B6C"],
-                    [`65 years and over\nStandard Error : ${fse.toFixed(2)}`, f, "color: #240147"]
+                    [`15 to 24 years\nStandard Error : ${ase}`, a, "#9102F7"],
+                    [`25 to 34 years\nStandard Error : ${bse} `, b, "#9C4EDC"],
+                    [`35 to 44 years\nStandard Error : ${cse}`, c, "#7A2BBF"],
+                    [`45 to 54 years\nStandard Error : ${dse}`, d, "color: #5A199B"],
+                    [`55 to 64 years\nStandard Error : ${ese}`, e, "color: #3C0B6C"],
+                    [`65 years and over\nStandard Error : ${fse}`, f, "color: #240147"]
                 ]);
 
                 var view = new google.visualization.DataView(data);
@@ -305,6 +365,9 @@ function drawChart() {
                     height: 660,
                     bar: { groupWidth: "95%" },
                     legend: { position: "none" },
+                    vAxis:{
+                        title:"Age Group"
+                    }
 
                 }
                 var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
