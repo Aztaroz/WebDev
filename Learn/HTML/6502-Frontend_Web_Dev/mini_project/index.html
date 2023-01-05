@@ -15,6 +15,8 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
     <!-- ------- -->
+    <!-- Sweet Alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -24,11 +26,15 @@
     <button onclick="createData()" class="btn btn-primary">Create</button>
     <form action="">
         <input type="text" id="deletetb">
-        <button onblur="deleteData()" class="btn btn-danger">Delete</button>
+        <button onclick="deleteData()">Delete</button>
     </form>
     <button onclick="readData()">Refresh</button>
     <span id="showdata"></span>
 
+    
+
+
+    
 </body>
 
 </html>
