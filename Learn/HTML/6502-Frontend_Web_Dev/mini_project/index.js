@@ -146,3 +146,25 @@ function editData(id) {
     //     Swal.fire(JSON.stringify(formValues))
     // }
 }
+
+
+
+function createCross() {
+    var name = document.getElementById('name').value
+    var lname = document.getElementById('lname').value
+    var imglink = document.getElementById('imglink').value
+
+    sessionStorage.setItem('name',name)
+    sessionStorage.setItem('lname',lname)
+    sessionStorage.setItem('imglink',imglink)
+    window.open("cross.html");
+}
+
+function cross() {
+    var name = sessionStorage.getItem('name')
+    var lname = sessionStorage.getItem('lname')
+    var imglink = sessionStorage.getItem('imglink')
+    console.log('This is name ',name);
+    console.log('This is lastname ',lname);
+    console.log('This is image link ',imglink);
+}
