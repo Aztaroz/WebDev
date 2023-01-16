@@ -168,3 +168,20 @@ function cross() {
     console.log('This is lastname ',lname);
     console.log('This is image link ',imglink);
 }
+
+
+function seeHidden(name) {
+    // var a = document.getElementById('hiddenname').value
+    Swal.fire({
+        title: `Hidden Value`,
+        html:
+            `<input id="swal-input1" class="swal2-input" disabled value="${name}">`,
+
+        focusConfirm: false,
+        preConfirm: () => {
+            return [
+                console.log("You seen hidden value")
+            ]
+        }
+    })
+}
