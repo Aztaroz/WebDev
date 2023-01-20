@@ -4,11 +4,11 @@ const hostname = '127.0.0.1'
 const port = 3001
 
 function tel(phone) {
-    let word = ['zero','one','two','three','four','five','six','seven','eight','nine']
+    let word = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
     let textnumarr = []
     let result = []
     for (let index = 0; index <= 9; index++) {
-        let singletext = phone.slice(index,index+1);
+        let singletext = phone.slice(index, index + 1);
         singletext = parseInt(singletext)
         textnumarr.push(singletext)
     }
@@ -21,7 +21,7 @@ function tel(phone) {
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200
-    res.setHeader('Content-type','text/html')
+    res.setHeader('Content-type', 'text/html')
 
     let name = 'Kasidit Boonchai'
     let phone = '0846995862'
@@ -29,21 +29,21 @@ const server = http.createServer((req, res) => {
     for (let index = 0; index <= 9; index++) {
         if (index % 2 == 0) {
             res.write(`<h2>[${index}]Name: ${name} \n </h2>`)
-        }else{
+        } else {
             res.write(`<h6>[${index}]Name: ${name} \n </h6>`)
         }
     }
 
-    
+
     telarr = tel(phone)
-    
+
     res.write(`<h2>phone number is ${phone} or ${telarr}</h2>`)
     // console.log(tel(phone));
-    
+
     res.end()
 })
 
-server.listen(port,hostname,() => {
+server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 })
 
