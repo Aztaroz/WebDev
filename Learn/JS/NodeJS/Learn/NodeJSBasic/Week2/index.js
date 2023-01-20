@@ -82,8 +82,6 @@ app.get("/6", (req, res) => {
     res.send("Hello express.js Page 6")
 })
 
-
-
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 })
