@@ -98,17 +98,17 @@ app.post('/getUser', (req, res) => {
     const { username, password } = req.body
     if (!username || !password) {
         message = "Username or Password not present";
-        res.status(400).send({ error: false, data: results, msg: message })
+        res.status(400).send({ status: 400, error: false, data: results, msg: message })
     } else {
         db.query(
-            'SELECT * FROM user_login WHERE username = ? and password = ? and activeflag <> 0',
+            'SELECT * FROM user_login WHERE username = ? and password = ? and activeflag = 1',
             [username, password],
             function (err, results) {
                 if (err)
                     console.log(err);
                 if (results.length == 0 || results === undefined) {
                     message = "Username or Password is wrong";
-                    res.status(400).send({ error: false, data: results, msg: message })
+                    res.status(400).send({ status: 400, error: false, data: results, msg: message })
                 } else {
                     db.query("SELECT * FROM customer", (error, results, fields) => {
                         if (error)
@@ -118,7 +118,7 @@ app.post('/getUser', (req, res) => {
                         else {
                             message = "Get users succesfuly.";
                             res.status(200).send({
-                                error: false, data: results, msg: message
+                                status: 200, error: false, data: results, msg: message
                             })
                         }
                     })
@@ -134,7 +134,7 @@ app.post('/insertData', (req, res) => {
     const { username, password, name, lastname, DoB, email } = req.body
     if (!username || !password) {
         message = "Username or Password not present";
-        res.status(400).send({ error: false, data: results, msg: message })
+        res.status(400).send({ status: 400, error: false, data: results, msg: message })
     } else {
         db.query(
             'SELECT * FROM user_login WHERE username = ? and password = ? and activeflag = 1',
@@ -144,7 +144,7 @@ app.post('/insertData', (req, res) => {
                     console.log(err);
                 if (results.length == 0 || results === undefined) {
                     message = "Username or Password is wrong";
-                    res.status(400).send({ error: false, data: results, msg: message })
+                    res.status(400).send({ status: 400, error: false, data: results, msg: message })
                 }
                 if (results[0].authority == 1 || results[0].authority == 2) {
                     db.query('INSERT INTO customer (name, lastname, DoB, email) VALUES (?,?,?,?)', [name, lastname, DoB, email],
@@ -156,13 +156,13 @@ app.post('/insertData', (req, res) => {
                             else {
                                 message = "Post data succesfuly.";
                                 res.status(200).send({
-                                    error: false, data: results, msg: message
+                                    status: 200, error: false, data: results, msg: message
                                 })
                             }
                         })
                 } else {
-                    message = "User not have permistion to create Doctor";
-                    res.status(400).send({ error: false, data: {}, msg: message })
+                    message = "User not have permistion to create data";
+                    res.status(400).send({status: 400, error: false, data: {}, msg: message })
                 }
             })
     }
@@ -175,7 +175,7 @@ app.post('/updateData/:id', (req, res) => {
     const id = req.params.id
     if (!username || !password) {
         message = "Username or Password not present";
-        res.status(400).send({ error: false, data: results, msg: message })
+        res.status(400).send({status: 400, error: false, data: results, msg: message })
     } else {
         db.query(
             'SELECT * FROM user_login WHERE username = ? and password = ? and activeflag = 1',
@@ -185,7 +185,7 @@ app.post('/updateData/:id', (req, res) => {
                     console.log(err);
                 if (results.length == 0 || results === undefined) {
                     message = "Username or Password is wrong";
-                    res.status(400).send({ error: false, data: results, msg: message })
+                    res.status(400).send({status: 400, error: false, data: results, msg: message })
                 }
                 if (results[0].authority == 1 || results[0].authority == 2 || results[0].authority == 3) {
                     db.query(`UPDATE customer SET name=?, lastname=?, DoB=?, point=?, rank_id=?, email=? WHERE customer_id=?;`, [name, lastname, DoB, point, rank_id, email, id], (error, result, fields) => {
@@ -194,13 +194,13 @@ app.post('/updateData/:id', (req, res) => {
                         else {
                             message = "Edit data succesfuly.";
                             res.status(200).send({
-                                error: false, data: results, msg: message
+                                status: 200, error: false, data: results, msg: message
                             })
                         }
                     })
                 } else {
-                    message = "User not have permistion to create Doctor";
-                    res.status(400).send({ error: false, data: {}, msg: message })
+                    message = "User not have permistion to update data";
+                    res.status(400).send({status: 400, error: false, data: {}, msg: message })
                 }
             })
     }
@@ -214,7 +214,7 @@ app.post('/deleteData/:id', (req, res) => {
     console.log(req.body);
     if (!username || !password) {
         message = "Username or Password not present";
-        res.status(400).send({ error: false, data: results, msg: message })
+        res.status(400).send({status: 400, error: false, data: results, msg: message })
     } else {
         db.query(
             'SELECT * FROM user_login WHERE username = ? and password = ? and activeflag = 1',
@@ -224,7 +224,7 @@ app.post('/deleteData/:id', (req, res) => {
                     console.log(err);
                 if (results.length == 0 || results === undefined) {
                     message = "Username or Password is wrong";
-                    res.status(400).send({ error: false, data: results, msg: message })
+                    res.status(400).send({status: 400, error: false, data: results, msg: message })
                 }
                 console.log(results[0].authority);
                 if (results[0].authority == 1 || results[0].authority == 2) {
@@ -234,13 +234,13 @@ app.post('/deleteData/:id', (req, res) => {
                         else {
                             message = "Edit data succesfuly.";
                             res.status(200).send({
-                                error: false, data: results, msg: message
+                                status: 200, error: false, data: results, msg: message
                             })
                         }
                     })
                 } else {
-                    message = "User not have permistion to create Doctor";
-                    res.status(400).send({ error: false, data: {}, msg: message })
+                    message = "User not have permistion to delete data";
+                    res.status(400).send({status: 400, error: false, data: {}, msg: message })
                 }
             })
     }
