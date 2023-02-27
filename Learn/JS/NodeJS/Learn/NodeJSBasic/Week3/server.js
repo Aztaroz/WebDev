@@ -72,6 +72,8 @@ app.delete('/deleteData/:id', (req, res) => {
 
 
 
+
+
 app.listen(port, () => {
     console.log(`App is running on http://localhost:${port}`);
 })

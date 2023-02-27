@@ -1,14 +1,38 @@
 const url = 'http://localhost:3000'
 
+const user = "viewer"
+const password = "viewer"
+
 function loadTable() {
-    fetch(url + '/getData')
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data.data);
-            let index = 0
-            let html = ''
-            for (object in data.data[index]) {
-                html += `<tr>
+    fetch(url + '/getUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "username": user,
+            "password": password
+        })
+    }).then((response) => {
+        if (response.status == 400) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: `${response.statusText}`,
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                window.location.reload()
+            })
+        }
+        else {
+            return response.json()
+        }
+    }).then((data) => {
+        console.log(data.data);
+        let index = 0
+        let html = ''
+        for (object in data.data[index]) {
+            html += `<tr>
                 <td>${data.data[index].customer_id}</td>
                 <td>${data.data[index].name}</td>
                 <td>${data.data[index].lastname}</td>
@@ -22,13 +46,14 @@ function loadTable() {
                 <td><button type="button" class="btn btn-danger"
                 onclick="deleteData(${data.data[index].customer_id})"><i class="fa-solid fa-trash"></i></i></button></td>
                 </tr>`
-                // console.log(html);
-                index++
-                document.getElementById('tableData').innerHTML = html
-            }
-        }).catch(error => {
-            console.error(error);
-        })
+
+            // console.log(html);
+            index++
+            document.getElementById('tableData').innerHTML = html
+        }
+    }).catch(error => {
+        console.error(error);
+    })
 }
 
 function createData() {
@@ -51,37 +76,68 @@ function createData() {
             const dob = document.getElementById('dob').value
             const email = document.getElementById('email').value
 
-            // console.log(JSON.stringify({
-            //     "name": name,
-            //     "lastname": lastName,
-            //     "DoB": dob,
-            //     "email": email,
-            // }));
-            // console.log(`name : ${name}
-            // lastname : ${lastName}
-            // dob : ${dob}
-            // email : ${email}`);
-
-            fetch(url + '/insertData', {
-                method: 'POST',
-                headers: {
-                    // 'Accept' : 'application/json, text/plain, /',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    "name": name,
-                    "lastname": lastName,
-                    "DoB": dob,
-                    "email": email,
+            if (name && lastName && dob && email) {
+                fetch(url + '/insertData', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "username": user,
+                        "password": password,
+                        "name": name,
+                        "lastname": lastName,
+                        "DoB": dob,
+                        "email": email,
+                    })
+                }).then((response) => {
+                    if (response.status == 400 || response.status == 401) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: `${response.statusText}`,
+                            confirmButtonText: 'OK',
+                        }).then((result) => {
+                            window.location.reload()
+                        })
+                    } else {
+                        return response.json()
+                    }
+                }).catch(error => {
+                    console.error(error);
                 })
-            }).then(data => console.log(data))
-                .then(response => response.json())
-                .catch(error => console.log(error))
-            Swal.fire('Saved!', '', 'success')
-            // window.location.reload()
+
+                // Old Fetch
+                // fetch(url + '/insertData', {
+                //     method: 'POST',
+                //     headers: {
+                //         // 'Accept' : 'application/json, text/plain, /',
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify({
+                //         "name": name,
+                //         "lastname": lastName,
+                //         "DoB": dob,
+                //         "email": email,
+                //     })
+                // }).then(data => console.log(data))
+                //     .then(response => response.json())
+                //     .catch(error => console.log(error))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Created!!',
+                    text: `Your data has been created.`,
+                    confirmButtonText: 'OK',
+                }).then((result) => {
+                    window.location.reload()
+                })
+                // window.location.reload()
+            }
         }
     })
+
 }
+
 
 function editData(id) {
     console.log(id);
@@ -125,24 +181,69 @@ function editData(id) {
                     dob : ${dob}
                     email : ${email}`);
 
+
                     fetch(url + '/updateData/' + id, {
-                        method: 'PUT',
+                        method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
+                            'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
+                            "username": user,
+                            "password": password,
                             "name": name,
                             "lastname": lastName,
                             "DoB": dob,
                             "point": point,
                             "rank_id": rank_id,
-                            "email": email
+                            "email": email,
                         })
-                    }).then(response => response.json())
-                        .then(data => console.log(data))
-                        .catch(error => console.log(error))
-                    Swal.fire('Saved!', '', 'success')
-                    window.location.reload()
+                    }).then((response) => {
+                        if (response.status == 400 || response.status == 401) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: `${response.statusText}`,
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+                                window.location.reload()
+                            })
+                        } else {
+                            return response.json()
+                        }
+                    }).catch(error => {
+                        console.error(error);
+                    })
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Updated!!',
+                        text: `Your data has been updated.`,
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        window.location.reload()
+                    })
+
+                    // window.location.reload()
+
+                    // Old Update
+                    // fetch(url + '/updateData/' + id, {
+                    //     method: 'PUT',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     }, // right here <<<<<<<<<<<<
+                    //     body: JSON.stringify({
+                    //         "name": name,
+                    //         "lastname": lastName,
+                    //         "DoB": dob,
+                    //         "point": point,
+                    //         "rank_id": rank_id,
+                    //         "email": email
+                    //     })
+                    // }).then(response => response.json())
+                    //     .then(data => console.log(data))
+                    //     .catch(error => console.log(error))
+                    // Swal.fire('Saved!', '', 'success')
+                    // window.location.reload()
                 }
             })
         }).catch(error => {
@@ -166,23 +267,68 @@ function deleteData(id) {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
+
+            // Old Delete
+            // fetch(url + `/deleteData/${id}`, {
+            //     method: 'DELETE',
+            //     body: JSON.stringify({
+            //         "customer_id": id
+            //     })
+            // }).then(response => response.json())
+            //     .then(data => console.log(data))
+            //     .catch(error => console.log(error))
+
+
             fetch(url + `/deleteData/${id}`, {
-                method: 'DELETE',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({
+                    "username": user,
+                    "password": password,
                     "customer_id": id
                 })
-            }).then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.log(error))
+            }).then((response) => {
+                if (response.status == 400 || response.status == 401) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: `${response.statusText}`,
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        window.location.reload()
+                    })
+                } else {
+                    return response.json()
+                }
+            }).catch(error => {
+                console.error(error);
+            })
 
-            window.location.reload()
+            Swal.fire({
+                icon: 'success',
+                title: 'Deleted!',
+                text: `Your data has been deleted.`,
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                window.location.reload()
+            })
+
         }
     })
+}
 
-
+function authen() {
+    fetch(url + '/getUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "username": "kasidit",
+            "password": "kasidit"
+        })
+    }).then((response) => response.json())
+        .then((data) => console.log(data));
 }
