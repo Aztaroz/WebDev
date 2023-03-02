@@ -15,6 +15,8 @@ const user = "admin"
 const password = "admin"    //password กับ username ใช้ข้อมูลเดียวกัน
 //############################################################
 
+
+
 function loadTable() {
     fetch(url + '/getUser', {
         method: 'POST',
@@ -27,9 +29,16 @@ function loadTable() {
         })
     }).then((response) => response.json())
         .then((data) => {
-            console.log(data.status);
+            console.log(data.role);
+            const role = data.role
+            if (role){
+                document.getElementById('role').innerHTML = `Logged in as : <b>${role}</b>`
+            }
+            else{
+                document.getElementById('role').innerHTML = `Logged in as : <b>Unknown</b>`
+            }
+            
             if (data.status == 200) {
-                console.log(data.data);
                 let index = 0
                 let html = ''
                 for (object in data.data[index]) {
@@ -47,8 +56,6 @@ function loadTable() {
                 <td><button type="button" class="btn btn-danger"
                 onclick="deleteData(${data.data[index].customer_id})"><i class="fa-solid fa-trash"></i></i></button></td>
                 </tr>`
-
-                    // console.log(html);
                     index++
                     document.getElementById('tableData').innerHTML = html
                 }
@@ -74,13 +81,13 @@ function createData() {
         title: 'Create Data',
         html:
             '<center><label for="name"><b>Name</b></label></center>' +
-            '<input id="name" class="swal2-input" placeholder="Name">' +
+            '<input id="name" class="swal2-input" placeholder="Name (varchar)">' +
             '<br><br><center><label for="lastname"><b>Lastname</b></label></center>' +
-            '<input id="lastName" class="swal2-input" placeholder="Lastname">' +
+            '<input id="lastName" class="swal2-input" placeholder="Lastname (varchar)">' +
             '<br><br><center><label for="dob"><b>Date of Birth</b></label></center>' +
-            '<input id="dob" class="swal2-input" type="date" placeholder="Date of Birth" style="width:59%">' +
+            '<input id="dob" class="swal2-input" type="date" placeholder="Date of Birth (date)" style="width:59%">' +
             '<br><br><center><label for="email"><b>Email</b></label></center>' +
-            '<input id="email" class="swal2-input" placeholder="email">'
+            '<input id="email" class="swal2-input" placeholder="email (varchar)">'
         ,
         focusConfirm: false,
         preConfirm: () => {
@@ -120,22 +127,6 @@ function createData() {
                         console.error(error);
                     })
 
-                // Old Fetch
-                // fetch(url + '/insertData', {
-                //     method: 'POST',
-                //     headers: {
-                //         // 'Accept' : 'application/json, text/plain, /',
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify({
-                //         "name": name,
-                //         "lastname": lastName,
-                //         "DoB": dob,
-                //         "email": email,
-                //     })
-                // }).then(data => console.log(data))
-                //     .then(response => response.json())
-                //     .catch(error => console.log(error))
                 Swal.fire({
                     icon: 'success',
                     title: 'Created!!',
@@ -144,7 +135,6 @@ function createData() {
                 }).then((result) => {
                     window.location.reload()
                 })
-                // window.location.reload()
             }
         }
     })
@@ -161,20 +151,20 @@ function editData(id) {
                 title: 'Edit Data',
                 html:
                     '<center><label for="name"><b>Name</b></label></center>' +
-                    `<input id="name" class="swal2-input" placeholder="Name" value="${data.data[0].name}">` +
+                    `<input id="name" class="swal2-input" placeholder="Name (varchar)" value="${data.data[0].name}">` +
                     '<br><br><center><label for="lastname"><b>Lastname</b></label></center>' +
-                    `<input id="lastName" class="swal2-input" placeholder="Lastname" value="${data.data[0].lastname}">` +
+                    `<input id="lastName" class="swal2-input" placeholder="Lastname (varchar)" value="${data.data[0].lastname}">` +
                     '<br><br><center><label for="dob"><b>Date of Birth</b></label></center>' +
-                    `<input id="dob" class="swal2-input" placeholder="Date of Birth" style="width:59%" value="${data.data[0].DoB}" type="date">` +
+                    `<input id="dob" class="swal2-input" placeholder="Date of Birth (date)" style="width:59%" value="${data.data[0].DoB}" type="date">` +
 
                     '<br><br><center><label for="point"><b>Point</b></label></center>' +
-                    `<input id="point" class="swal2-input" placeholder="Point" style="width:59%" value="${data.data[0].point}">` +
+                    `<input id="point" class="swal2-input" placeholder="Point (int)" style="width:59%" value="${data.data[0].point}">` +
 
                     '<br><br><center><label for="rank_id"><b>Rank ID</b></label></center>' +
-                    `<input id="rank_id" class="swal2-input" placeholder="Rank ID" style="width:59%" value="${data.data[0].rank_id}">` +
+                    `<input id="rank_id" class="swal2-input" placeholder="Rank ID (int)" style="width:59%" value="${data.data[0].rank_id}">` +
 
                     '<br><br><center><label for="email"><b>Email</b></label></center>' +
-                    `<input id="email" class="swal2-input" placeholder="email" value="${data.data[0].email}">`
+                    `<input id="email" class="swal2-input" placeholder="email (varchar)" value="${data.data[0].email}">`
                 ,
                 focusConfirm: false,
                 preConfirm: () => {
@@ -235,37 +225,12 @@ function editData(id) {
                             }
                         })
 
-
-                    // window.location.reload()
-
-                    // Old Update
-                    // fetch(url + '/updateData/' + id, {
-                    //     method: 'PUT',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     }, // right here <<<<<<<<<<<<
-                    //     body: JSON.stringify({
-                    //         "name": name,
-                    //         "lastname": lastName,
-                    //         "DoB": dob,
-                    //         "point": point,
-                    //         "rank_id": rank_id,
-                    //         "email": email
-                    //     })
-                    // }).then(response => response.json())
-                    //     .then(data => console.log(data))
-                    //     .catch(error => console.log(error))
-                    // Swal.fire('Saved!', '', 'success')
-                    // window.location.reload()
                 }
             })
         }).catch(error => {
             console.error(error);
         })
 
-    // fetch(url + '/updateData/' + id, {
-    //     method
-    // })
 }
 
 function deleteData(id) {
@@ -280,15 +245,6 @@ function deleteData(id) {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Old Delete
-            // fetch(url + `/deleteData/${id}`, {
-            //     method: 'DELETE',
-            //     body: JSON.stringify({
-            //         "customer_id": id
-            //     })
-            // }).then(response => response.json())
-            //     .then(data => console.log(data))
-            //     .catch(error => console.log(error))
 
             fetch(url + `/deleteData/${id}`, {
                 method: 'POST',
@@ -330,17 +286,3 @@ function deleteData(id) {
         }
     })
 }
-
-// function authen() {
-//     fetch(url + '/getUser', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             "username": "kasidit",
-//             "password": "kasidit"
-//         })
-//     }).then((response) => response.json())
-//         .then((data) => console.log(data));
-// }

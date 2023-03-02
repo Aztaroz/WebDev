@@ -27,10 +27,20 @@
 
 </head>
 
-<body onload="loadTable()">
+<body onload="loadTable()" style="background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);">
 
-    <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-    <button type="button" class="btn btn-primary w-100" style="width: 100%; height: 10%; position: fixed;"
+    <nav class="navbar bg-body-tertiary" class="navbar bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand">Customer Data</a>
+            <form class="d-flex" role="search">
+                <div class="alert alert-primary" role="alert" id="role">
+                    Logged in as : Unknown
+                </div>
+            </form>
+        </div>
+    </nav>
+
+    <button type="button" class="btn btn-primary w-100" style="width: 100%; height: 10%; position: fixed; margin: auto;"
         onclick="createData()">Create</button>
 
     <br><br><br>
@@ -54,5 +64,30 @@
     </table>
 
 </body>
+
+<footer class="bg-dark text-center text-white" style="position: fixed; left: 0; bottom: 0; width: 100%;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/doctor.flight"
+                role="button" target="_blank"><i class="fab fa-facebook-f"></i></a>
+
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Aztaroz" role="button"
+                target="_blank"><i class="fab fa-github"></i></a>
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        Made with ❤
+        <a class="text-white" href="https://www.facebook.com/doctor.flight" target="_blank">Kasidit Boonchai</a>
+    </div>
+    <!-- Copyright -->
+</footer>
 
 </html>
