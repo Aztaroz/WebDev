@@ -35,6 +35,20 @@ app.get('/getData', (req, res) => {
     })
 })
 
+app.get('/getData/:id', (req, res) => {
+    const id = req.params.id
+    console.log(id);
+    db.query("SELECT * FROM user WHERE id =?",[id], (error, result, fields) => {
+        if (error) throw error
+        if (result.length == 0 || result === undefined)
+            message = "Table developmentteam is empty"
+        else
+            message = "Get developmentteam successfully"
+
+        res.status(200).send({ error: false, data: result, msg: message })
+    })
+})
+
 app.post('/insertData', (req, res) => {
     const { hashed_password, first_name, last_name, email, user_role_id } = req.body
     res.send(req.body);
